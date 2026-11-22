@@ -1,0 +1,557 @@
+{
+"id": "CH10",
+"title": "FlashSystem Grid",
+"zh": "FlashSystem Grid 架構",
+"items": [
+[
+"What is a FlashSystem grid?",
+[
+"A scale-out architecture that adds independent systems to create a federated cluster",
+"A RAID layout across FlashCore modules",
+"A replication partnership between two sites",
+"A cloud storage tier"
+],
+"FlashSystem Grid 以加入多個獨立系統組成 Federated Cluster 的方式橫向擴充。",
+"簡報 S3、S4；Concept Guide Ch10"
+],
+[
+"Up to how many systems can a FlashSystem grid support?",
+[
+"32",
+"8",
+"4",
+"64"
+],
+"每個 FlashSystem Grid 最多支援 32 個系統，效能、容量與 Volume、Host、Snapshot 數量線性成長。",
+"簡報 S3、S4；Concept Guide Ch10"
+],
+[
+"How does a FlashSystem grid compare to a traditional scale-out system that uses I/O groups?",
+[
+"It allows greater scalability with linear growth and independent updates",
+"It is limited to 4 systems",
+"It requires identical hardware models",
+"It requires all systems to update together"
+],
+"相較於以 I/O Group 擴充的傳統架構，Grid 擴充性更高，成員可獨立更新並混合不同型號與世代。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"Can systems with different hardware models and generations be included in one FlashSystem grid?",
+[
+"Yes",
+"No, all must be the same model",
+"Only within the same generation",
+"Only if they share a code level"
+],
+"同一 Grid 可包含不同硬體型號與世代，便於硬體汰換或分層。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"What determines the maximum number of systems in a FlashSystem grid?",
+[
+"The software version running on the coordinator system",
+"The number of FC switches",
+"The size of the largest pool",
+"The number of hosts"
+],
+"Grid 可容納的最大系統數取決於 Coordinator 系統的軟體版本；舊版成員可能出現驗證錯誤。",
+"Concept Guide Ch10"
+],
+[
+"How can storage partitions be moved between systems in a FlashSystem grid?",
+[
+"They can be non-disruptively migrated",
+"Only by backup and restore",
+"Only by remote copy with downtime",
+"They cannot be moved"
+],
+"Storage Partition 可在 Grid 內的系統之間不中斷移轉。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"How many I/O groups can a system in a FlashSystem grid have?",
+[
+"A maximum of one, with the multiple I/O group compatibility mode disabled",
+"Up to two",
+"Up to four",
+"Unlimited"
+],
+"Grid 成員最多只能有一個 I/O Group，且必須停用多 I/O Group 相容模式。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"Which system topology is required for FlashSystem grid members?",
+[
+"Standard",
+"Stretched",
+"HyperSwap",
+"Enhanced stretched"
+],
+"Grid 成員的 System Topology 必須為 Standard。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"Which system layer is required for FlashSystem grid members?",
+[
+"Replication",
+"Storage",
+"Virtualization",
+"Controller"
+],
+"Grid 成員的 System Layer 必須為 Replication。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"Which option is supported for system management IP addresses in a FlashSystem grid?",
+[
+"IPv4 using FQDN with a DNS server configured",
+"IPv4 with NAT",
+"DHCP-assigned addresses",
+"Link-local IPv6 only"
+],
+"Grid 成員管理 IP 可用 IPv4、IPv6，或搭配已設定 DNS 的 FQDN，以及 IPv4 與 FQDN 混合。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"What type of certificates do grid members use by default for secure communication?",
+[
+"System-signed certificates",
+"Self-signed host certificates from IP quorum",
+"Let's Encrypt certificates",
+"No certificates"
+],
+"Grid 成員交換憑證以安全通訊，預設為 System-signed 憑證。",
+"簡報 S4；Concept Guide Ch10"
+],
+[
+"If a system running 8.7.2 or older is part of a grid, what must you do before upgrading it to the current version?",
+[
+"Update the existing FlashSystem grid configuration",
+"Remove all partitions",
+"Disable encryption",
+"Convert it to a stretched system"
+],
+"8.7.2 或更舊版本的 Grid 成員，升級前必須先更新既有 Grid Configuration。",
+"Concept Guide Ch10"
+],
+[
+"What is the coordinator system?",
+[
+"The system on which the grid is created and managed, which also becomes the first member",
+"The system with the most capacity",
+"A dedicated management appliance",
+"The IP quorum server"
+],
+"Coordinator 是建立與管理 Grid 的系統，也是 Grid 的第一個成員。",
+"簡報 S5；Concept Guide Ch10"
+],
+[
+"Where do you create a new FlashSystem grid in the management GUI?",
+[
+"Settings > System > FlashSystem grid > Create a new FlashSystem grid",
+"Storage Systems > Add a system",
+"Access > Grid",
+"Pools > Grid"
+],
+"於 Settings > System > FlashSystem grid 選 Create a new FlashSystem grid；CLI 為 managegrid。",
+"簡報 S5；Concept Guide Ch10"
+],
+[
+"Which CLI command creates and manages a FlashSystem grid?",
+[
+"managegrid",
+"mkgrid",
+"chgrid",
+"addgrid"
+],
+"`managegrid` 用於建立 Grid、加入、接受、移除與離開等操作。",
+"簡報 S5；Concept Guide Ch10"
+],
+[
+"How can a system join an existing grid from its own GUI?",
+[
+"Settings > System > FlashSystem grid > Join an existing FlashSystem grid, then enter the coordinator address",
+"Storage Systems > Join",
+"Access > Truststore > Join",
+"It cannot; only the coordinator can add it"
+],
+"成員端可選 Join an existing FlashSystem grid，輸入 Coordinator 的 IP 或 FQDN，GUI 會引導驗證並交換憑證。",
+"簡報 S5；Concept Guide Ch10"
+],
+[
+"When adding a system to a grid with the CLI, which command adds the coordinator certificate to the truststore?",
+[
+"mktruststore",
+"chsystemcert",
+"lssystemcertstore",
+"managegrid -accept"
+],
+"以 `lssystemcertstore`、`chsystemcertstore` 取得憑證，再用 `mktruststore` 加入 Truststore，之後以 join 選項申請加入。",
+"簡報 S5；Concept Guide Ch10"
+],
+[
+"When adding a system to the grid by CLI, what does the coordinator do after the new system requests to join?",
+[
+"Accepts the request with the accept option",
+"Runs the leave option",
+"Reboots",
+"Creates a partition"
+],
+"新系統以 join 申請後，Coordinator 需加入新系統憑證到 Truststore，並以 accept 選項接受。",
+"Concept Guide Ch10"
+],
+[
+"Which information does the FlashSystem grid dashboard show?",
+[
+"Health, reachability, aggregated capacity, migrations, and AI suggestions",
+"Only host I/O latency",
+"Only replication RPO",
+"Only audit logs"
+],
+"Grid Dashboard 顯示硬體健康、可連線狀態、彙總容量、移轉狀態與 AI Suggestions。",
+"Concept Guide Ch10 Viewing a FlashSystem grid"
+],
+[
+"When is logical capacity visible on the FlashSystem grid dashboard?",
+[
+"Only if FCM drives are used in all systems of the grid",
+"Always",
+"Only for the coordinator",
+"Only when migrations are active"
+],
+"Grid Dashboard 的 Logical Capacity 只有在所有系統都使用 FCM Drive 時才會顯示。",
+"Concept Guide Ch10"
+],
+[
+"Where do the AI suggestions on the grid dashboard come from?",
+[
+"IBM Storage Insights",
+"The coordinator's event log only",
+"VMware vCenter",
+"IBM Fix Central"
+],
+"AI Suggestions 是 IBM Storage Insights 依整個 Grid 的歷史資料分析產生的建議。",
+"Concept Guide Ch10"
+],
+[
+"Which component is NOT checked by the connectivity health status on the Storage systems page?",
+[
+"Drive firmware levels",
+"Hosts",
+"Key servers",
+"LDAP servers"
+],
+"Connectivity Health 檢查 Hosts、Partnerships、Call Home、Key Servers、Email/SMTP 與 LDAP Servers。",
+"Concept Guide Ch10"
+],
+[
+"Which CLI commands can be used to visualize the FlashSystem grid?",
+[
+"lsgrid, lsgridsystem, lsgridmembers, and lsgridpartition",
+"lssystem and lsnode only",
+"lspartnership only",
+"lsportset only"
+],
+"可使用 lsgrid、lsgridsystem、lsgridmembers 與 lsgridpartition 檢視 Grid。",
+"Concept Guide Ch10"
+],
+[
+"When can a system NOT be removed from a FlashSystem grid?",
+[
+"When a partition migration to or from it is in progress",
+"When it has hosts",
+"When it is a member",
+"When it uses FQDN"
+],
+"若有 Partition 移轉正在進出該系統，需等移轉完成才能移除。",
+"Concept Guide Ch10 Removing a system"
+],
+[
+"What happens when you run the leave option from the coordinator system?",
+[
+"The coordinator leaves and the FlashSystem grid is deleted",
+"Only the coordinator role moves",
+"All partitions are deleted",
+"Nothing; it is not allowed"
+],
+"在 Coordinator 執行 leave 會讓它離開並刪除整個 Grid。",
+"Concept Guide Ch10"
+],
+[
+"What happens when you run the leave option from a member system?",
+[
+"It partially removes the member; the coordinator must also use -remove to complete removal",
+"It fully removes the member",
+"It deletes the grid",
+"It promotes the member to coordinator"
+],
+"在成員端執行 leave 只會部分移除，需在 Coordinator 對該成員執行 -remove 才能完全移除。",
+"Concept Guide Ch10"
+],
+[
+"What happens to truststore entries when a member system is removed from a grid?",
+[
+"They are removed",
+"They are kept for future use",
+"They are moved to the coordinator",
+"They become expired"
+],
+"移除成員時，加入時建立的 Truststore 項目會被移除。",
+"Concept Guide Ch10"
+],
+[
+"Which systems can a member remove from the grid?",
+[
+"Only itself",
+"Any system",
+"Only the coordinator",
+"Members cannot remove anything"
+],
+"成員只能移除自己，Coordinator 則可移除 Grid 中任何系統。",
+"Concept Guide Ch10"
+],
+[
+"What happens when the last system is removed from a FlashSystem grid?",
+[
+"The FlashSystem grid is deleted",
+"The grid remains empty",
+"The coordinator becomes a member",
+"The grid moves to Storage Insights"
+],
+"移除最後一個系統會刪除 Grid。",
+"Concept Guide Ch10"
+],
+[
+"During grid onboarding, what must be done on a new system before adding it from the coordinator?",
+[
+"Initialize it, enter the cluster management IP, save, and restart",
+"Fully configure it with pools and hosts",
+"Join it to a partnership",
+"Upgrade it to the coordinator's code level manually"
+],
+"Onboarding 前先初始化系統、輸入管理 IP 與選用 DNS、儲存並重新啟動。",
+"簡報 S6；Concept Guide Ch10 onboarding"
+],
+[
+"Automatic initialization of newly detected systems through the grid applies to which systems?",
+[
+"Systems connected over a Fibre Channel fabric",
+"Systems connected over iSCSI only",
+"Systems in the cloud",
+"Systems with NVMe drives only"
+],
+"Newly detected systems 的自動初始化只適用於透過 FC Fabric 連接的系統。",
+"簡報 S6；Concept Guide Ch10"
+],
+[
+"Why does grid onboarding prompt you to reset the password on an unconfigured system?",
+[
+"To ensure the system is not added with default credentials",
+"To enable LDAP",
+"To enable MFA automatically",
+"To create a partition user"
+],
+"Onboarding 會要求重設密碼，避免系統以預設認證加入。",
+"簡報 S6；Concept Guide Ch10"
+],
+[
+"During onboarding, from where does the new system import configuration?",
+[
+"The grid coordinator or a grid reference system with a compatible code level",
+"IBM Storage Insights",
+"The IP quorum",
+"A USB key"
+],
+"新系統從 Coordinator 或相容版本的 Grid Reference System 匯入 Configuration，可取消不需要的設定群組。",
+"簡報 S6；Concept Guide Ch10"
+],
+[
+"Can required settings be deselected during onboarding configuration import?",
+[
+"No, required settings are mandatory",
+"Yes, all settings are optional",
+"Only by the superuser",
+"Only with the CLI"
+],
+"Required Settings 為必要設定，不能取消勾選。",
+"Concept Guide Ch10 Note"
+],
+[
+"Which settings are entered separately as system-specific information during onboarding?",
+[
+"Call Home, Storage Insights, telemetry sharing, or encryption",
+"Extent size and RAID level",
+"Host WWPNs",
+"Volume names"
+],
+"Call Home、Storage Insights、Telemetry 分享或加密等屬系統專屬資訊，需另行設定。",
+"簡報 S6；Concept Guide Ch10"
+],
+[
+"What should you avoid on a system whose setup is being completed through the FlashSystem grid?",
+[
+"Performing any initial configuration",
+"Resetting the password",
+"Entering a management IP",
+"Restarting the system"
+],
+"官方提醒若透過 Grid 完成設定，不要另外執行初始 Configuration。",
+"Concept Guide Ch10 Note"
+],
+[
+"From where can you assign a new coordinator by using the GUI?",
+[
+"Only from the current coordinator, using Assign as coordinator",
+"From any member",
+"From IBM Storage Insights",
+"From the service assistant"
+],
+"GUI 的 Assign as coordinator 只能從目前的 Coordinator 操作。",
+"簡報 S6"
+],
+[
+"Which CLI command makes a system the new coordinator?",
+[
+"managegrid -makecoordinator, run on the new coordinator",
+"managegrid -leave",
+"chsystem -coordinator",
+"lsgridsystem -coordinator"
+],
+"在新 Coordinator 上執行 `managegrid -makecoordinator`。",
+"簡報 S6"
+],
+[
+"If the current coordinator is offline, how can you change the coordinator?",
+[
+"Only by using the CLI, choosing the member with the latest grid_gen_num",
+"Only by using the GUI",
+"It cannot be changed",
+"By rebooting all members"
+],
+"目前 Coordinator 離線時只能用 CLI，選擇 grid_gen_num 最新的成員 (以 lsgridsystem 檢查)。",
+"簡報 S6"
+],
+[
+"When migrating a multi-I/O group system to a grid, from which I/O group do you start?",
+[
+"The lowest-numbered I/O group",
+"The highest-numbered I/O group",
+"The I/O group with the most volumes",
+"Any I/O group"
+],
+"可不中斷地逐步移轉，從編號最低的 I/O Group 開始。",
+"簡報 S7"
+],
+[
+"After moving resources off one I/O group during migration to a grid, what is done?",
+[
+"The nodes of that I/O group are removed",
+"The I/O group is renamed",
+"A partnership is created",
+"The pool is deleted"
+],
+"移轉完一個 I/O Group 的資源後移除其 Nodes，重複直到只剩一個 I/O Group。",
+"簡報 S7"
+],
+[
+"Which configuration is NOT supported for migrating a multi-I/O group system to a grid without first removing it?",
+[
+"Policy-based replication",
+"Child pools",
+"Thin volumes",
+"Host clusters"
+],
+"已設定 Policy-based Replication 的系統不支援，須先取消。",
+"簡報 S7"
+],
+[
+"What must be contacted before migrating an Enhanced Stretched system to a grid?",
+[
+"IBM Support",
+"The SAN administrator only",
+"VMware Support",
+"No one"
+],
+"Enhanced Stretched 系統需先聯絡 IBM Support。",
+"簡報 S7"
+],
+[
+"What is required for the draft partition when migrating a multi-I/O group system to a grid?",
+[
+"Only one draft partition, containing only objects mapped to the lowest I/O group",
+"Multiple draft partitions, one per I/O group",
+"No draft partition",
+"A draft partition with all objects"
+],
+"需啟用 Partition Migration，且只能有一個 Draft Partition，只包含映射到最低 I/O Group 的物件。",
+"簡報 S7"
+],
+[
+"In grid multi-tenancy, what can a Grid Administrator do?",
+[
+"View all systems and partitions, create and manage tenants, and configure HA and DR",
+"Only manage volumes in assigned pools",
+"Only view their tenant's partitions",
+"Only manage snapshots"
+],
+"Grid Administrator 管理整個 Grid 與 Tenant，包含規劃容量、設定 HA 與 DR、維護系統健康與 System-scoped Snapshot Policy。",
+"簡報 S8、S9"
+],
+[
+"What can a Tenant Administrator see?",
+[
+"Only the systems and partitions assigned to that tenant",
+"All systems in the grid",
+"All tenants",
+"Only the coordinator"
+],
+"Tenant Administrator 只看得到指派給該 Tenant 的系統與 Partition，並在指派的 Pool 上管理 Volume Group。",
+"簡報 S8、S9"
+],
+[
+"How is tenant isolation achieved in grid multi-tenancy?",
+[
+"With ownership groups",
+"With separate FC fabrics only",
+"With separate code levels",
+"With different extent sizes"
+],
+"建立 Tenant 時指定名稱、系統，並建立專屬 User Group 與使用者，以 Ownership Group 達成 Isolation。",
+"簡報 S9"
+],
+[
+"When partitions migrate within the grid, what keeps automation credentials working?",
+[
+"Partition users with the partition IP endpoint",
+"System users on the coordinator",
+"The IP quorum",
+"Storage Insights"
+],
+"Partition 在 Grid 內移轉時，Partition User 搭配 Partition IP 端點讓自動化憑證持續有效。",
+"Concept Guide Ch10"
+],
+[
+"What does the View FlashSystem grid operations option do?",
+[
+"Navigates to the grid's Storage systems page in IBM Storage Insights",
+"Opens the coordinator's CLI",
+"Starts a migration",
+"Opens the audit log"
+],
+"View FlashSystem grid operations 會導向 IBM Storage Insights 中對應 Grid 的 Storage systems 頁面。",
+"Concept Guide Ch10"
+],
+[
+"What is shown on the Storage partitions page of a FlashSystem grid?",
+[
+"Partition location, replication topology and status, volume groups, migration status, and placement evaluation status",
+"Only drive health",
+"Only host WWPNs",
+"Only audit log entries"
+],
+"Grid 的 Storage partitions 頁面列出 Partition 位置、Replication Topology 與狀態、Volume Group、移轉狀態與 Placement Evaluation 狀態。",
+"Concept Guide Ch10"
+]
+]
+}

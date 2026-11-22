@@ -1,0 +1,557 @@
+{
+"id": "CH13",
+"title": "Stretched Systems",
+"zh": "Stretched System 架構",
+"items": [
+[
+"What is a stretched system?",
+[
+"An extended HA method supported by SAN Volume Controller that continues I/O after the loss of half the system",
+"A system with more than four I/O groups",
+"A FlashSystem grid with 32 members",
+"A replication partnership over IP"
+],
+"Stretched System 是 SAN Volume Controller 支援的延伸 HA 方式，失去一半系統後仍可繼續 I/O。",
+"簡報 S3；Concept Guide Ch13"
+],
+[
+"Why is a stretched system sometimes called a split system?",
+[
+"One half of the system and I/O group is usually at a distant location, often 10 km or more",
+"It splits volumes into two halves",
+"It uses split cache",
+"It splits the GUI into two views"
+],
+"因一半的系統與 I/O Group 通常位於遠端 (常達 10 公里以上)，所以又稱 Split System。",
+"簡報 S3；Concept Guide Ch13"
+],
+[
+"What must the third site host in a stretched system?",
+[
+"A storage system that provides a quorum disk (or an IP quorum application)",
+"A third node of each I/O group",
+"The management GUI",
+"All host servers"
+],
+"第三站點須提供 Quorum Disk 或 IP Quorum，在兩主站點連線失效時自動仲裁。",
+"簡報 S3、S4；Concept Guide Ch13"
+],
+[
+"What additional capability does an enhanced stretched system provide over automatic site failover?",
+[
+"A manual override to choose which of two sites continues operation",
+"Synchronous replication to a cloud",
+"Automatic node replacement",
+"Unlimited I/O groups"
+],
+"Enhanced Stretched System 除自動 Failover 外，還提供手動覆寫以決定哪個站點繼續運作。",
+"簡報 S3；Concept Guide Ch13"
+],
+[
+"How does an enhanced stretched system reduce inter-site traffic?",
+[
+"It intelligently routes I/O between nodes and controllers",
+"It disables the cache",
+"It compresses all data",
+"It uses only one site"
+],
+"Enhanced Stretched System 智慧導引 Node 與 Controller 間的 I/O，減少跨站流量並降低 Host Latency。",
+"簡報 S3；Concept Guide Ch13"
+],
+[
+"In an enhanced stretched system, which objects must have the site attribute set?",
+[
+"Node and controller objects",
+"Volume and pool objects",
+"User and user group objects",
+"Snapshot objects"
+],
+"Enhanced Stretched System 須在 Node 與 Controller 物件設定 site 屬性。",
+"簡報 S3；Concept Guide Ch13 Note"
+],
+[
+"How is each site defined in a stretched system configuration?",
+[
+"As an independent failure domain",
+"As a separate I/O group",
+"As a separate pool",
+"As a separate partition"
+],
+"每個站點定義為獨立 Failure Domain，一個站點故障時另一站點可不中斷繼續運作。",
+"簡報 S4；Concept Guide Ch13"
+],
+[
+"Which can be considered separate sites in a stretched configuration?",
+[
+"Different power phases in one data center, buildings on a campus, or different cities",
+"Only different countries",
+"Only different racks on the same power phase",
+"Only different floors with shared power"
+],
+"站點可以是同一資料中心內不同電力相位 (例如兩個 Rack)、同園區不同建築或不同城市。",
+"簡報 S5；Concept Guide Ch13"
+],
+[
+"What is the key prerequisite for a stretched system to continue operating after the loss of one site?",
+[
+"Each site contains only one node from each pair of nodes, with mirroring configured",
+"Each site has all nodes",
+"All storage is at one site",
+"Hosts are at the third site"
+],
+"每個站點只能放每對 Node 中的一個，且必須搭配適當的 Mirroring 技術，才能真正提供 HA。",
+"Concept Guide Ch13"
+],
+[
+"Which host connection type is NOT supported in stretched system configurations?",
+[
+"NVMe-based connections",
+"Fibre Channel",
+"iSCSI",
+"SCSI over FC"
+],
+"Stretched 環境支援 FC 與 iSCSI Host 連線，但不支援以 NVMe 為基礎的 Host 連線。",
+"Concept Guide Ch13"
+],
+[
+"Ethernet connections between nodes in a stretched system are supported only through which adapters?",
+[
+"RDMA-capable adapters",
+"1 Gbps onboard ports",
+"Management ports",
+"Any iSCSI port"
+],
+"Node 之間的 Ethernet 連線只能透過各 Node 安裝並設定的 RDMA-capable 介面卡。",
+"Concept Guide Ch13"
+],
+[
+"For 4-node stretched SVC clusters without volume mirroring, how does IBM recommend upgrading?",
+[
+"Using the manual software upgrade procedure",
+"Using the automatic upgrade",
+"By replacing nodes",
+"By disabling the stretched topology"
+],
+"這類 Configuration 可能因重新探索 Backend 的 Race Condition 導致升級卡住，IBM 建議使用手動升級程序。",
+"Concept Guide Ch13"
+],
+[
+"Can a stretched system guarantee continuous operation after the failure of two failure domains?",
+[
+"No",
+"Yes",
+"Only with ISLs",
+"Only with IP quorum"
+],
+"Stretched System 設計為失去一個 Failure Domain 後繼續運作，無法保證兩個 Failure Domain 失效後仍持續。",
+"Concept Guide Ch13"
+],
+[
+"Which CLI command assigns a node to a site?",
+[
+"chnode",
+"chcontroller",
+"chhost",
+"chsite"
+],
+"以 `chnode` 指派 Node 的 Site，`chcontroller` 指派後端儲存，`chhost` 指派 Host。",
+"簡報 S8；Concept Guide Ch13 Configuration steps"
+],
+[
+"When is the enhanced mode enabled?",
+[
+"After all nodes, hosts, and storage systems are assigned to sites, by changing the system topology to stretched",
+"Before assigning any sites",
+"Automatically at installation",
+"After creating volumes"
+],
+"所有 Node、Host 與儲存系統都指派站點後，將 System Topology 改為 stretched 即啟用 Enhanced 模式。",
+"Concept Guide Ch13"
+],
+[
+"What can additional nodes cabled to a stretched system be configured as?",
+[
+"Hot-spare nodes",
+"Quorum nodes",
+"Witness nodes",
+"Expansion nodes"
+],
+"額外佈線的 Node 可設定為 Hot-spare Node，在站點中任一 Node 不可用時不中斷接手 Host I/O。",
+"Concept Guide Ch13"
+],
+[
+"Which statement about planning a stretched topology is correct?",
+[
+"Each node of an I/O group must be at a different site",
+"Both nodes of an I/O group must be at the same site",
+"Quorum MDisks must be at the primary site",
+"Only one site needs MDisks"
+],
+"同一 I/O Group 的每個 Node 必須位於不同站點，每個站點都要有 MDisk，第三站點要有 Quorum 用 MDisk。",
+"簡報 S5；Concept Guide Ch13"
+],
+[
+"What must be set for each controller before the topology can be set to stretched?",
+[
+"The site attribute to 1, 2, or 3",
+"The extent size",
+"The cache mode",
+"The portset"
+],
+"每個 Controller 必須先設定 site 為 1、2 或 3，才可將 Topology 設為 stretched。",
+"簡報 S5；Concept Guide Ch13"
+],
+[
+"Are expansion enclosures supported with stretched system topology?",
+[
+"No",
+"Yes",
+"Only SAS enclosures",
+"Only at site 3"
+],
+"Stretched System Topology 不支援 Expansion Enclosure。",
+"簡報 S5；Concept Guide Ch13 Note"
+],
+[
+"Nodes in the same I/O group separated by more than what distance must use longwave Fibre Channel?",
+[
+"100 meters",
+"10 meters",
+"1 kilometer",
+"10 kilometers"
+],
+"同一 I/O Group 的 Node 相距超過 100 公尺 (109 碼) 時須使用 Longwave Fibre Channel。",
+"簡報 S5；Concept Guide Ch13"
+],
+[
+"How many SAN fabrics should each node be directly connected to at the primary and secondary sites?",
+[
+"2 - 8 fabrics",
+"Exactly 1",
+"At least 10",
+"16 - 32"
+],
+"每個 Node 直接連到主要與次要站點的 2 至 8 個 SAN Fabric；iSCSI 則連到兩個以上 Ethernet Fabric。",
+"簡報 S6；Concept Guide Ch13"
+],
+[
+"What should be avoided in paths between nodes and external storage systems?",
+[
+"Inter-switch links (ISLs)",
+"Longwave SFPs",
+"Zoning",
+"Multipathing"
+],
+"應避免在 Node 與外部儲存之間的路徑使用 ISL；若無法避免則不可過度訂閱並通常需 Trunking。",
+"簡報 S5、S6；Concept Guide Ch13"
+],
+[
+"For which models are stretched systems NOT recommended?",
+[
+"Models that support nodes with internal flash drives",
+"Models with FC adapters",
+"Models with 64 GB cache",
+"Models with longwave SFPs"
+],
+"具內部 Flash Drive Node 的型號不建議使用 Stretched System。",
+"簡報 S6；Concept Guide Ch13 Notes"
+],
+[
+"How can quorum be accessed in a stretched system?",
+[
+"Only through the current owner of the MDisk used as the active quorum disk",
+"Through any node at any time",
+"Only through the configuration node",
+"Only through IP"
+],
+"Stretched System 的 Quorum 只能經由作用中 Quorum MDisk 目前的擁有者存取。",
+"簡報 S6；Concept Guide Ch13"
+],
+[
+"What must a storage system at the third site support?",
+[
+"Extended quorum disks",
+"Deduplication",
+"NVMe-oF",
+"Encryption at rest"
+],
+"第三站點的儲存系統必須支援 Extended Quorum Disk。",
+"Concept Guide Ch13"
+],
+[
+"Where should the preferred node of each volume be set, where possible?",
+[
+"To the node in the same site as the host the volume is mapped to",
+"To the node at the third site",
+"Always to node 1",
+"To the configuration node"
+],
+"盡量將每個 Volume 的 Preferred Node 設為與映射 Host 同一站點的 Node。",
+"Concept Guide Ch13"
+],
+[
+"Why is a single switch at the third site a problem?",
+[
+"It can create a single fabric instead of two independent fabrics, which is unsupported",
+"It increases latency",
+"It breaks quorum",
+"It disables ISLs"
+],
+"第三站點只用一台 Switch 可能形成單一 Fabric 而非兩個獨立冗餘 Fabric，單一 Fabric 不受支援。",
+"Concept Guide Ch13"
+],
+[
+"How should Ethernet port 1 on every node in a stretched system be connected?",
+[
+"To the same subnet or subnets",
+"To different subnets per site",
+"To the management network only",
+"It must not be connected"
+],
+"每個 Node 的 Ethernet Port 1 須接到相同子網路，Port 2 亦同 (可與 Port 1 不同)。",
+"Concept Guide Ch13"
+],
+[
+"When are IP quorum applications used in a stretched system?",
+[
+"When the stretched system connects to iSCSI-attached storage systems",
+"Only for FC storage",
+"Never; only quorum disks are allowed",
+"Only when there are more than 8 nodes"
+],
+"Stretched System 連接 iSCSI 儲存時使用 IP Quorum Application；iSCSI 儲存不能設在第三站點。",
+"Concept Guide Ch13"
+],
+[
+"If communication is lost between the primary and secondary sites, which site continues processing?",
+[
+"The site with access to the active quorum disk",
+"The site with more nodes",
+"The site with the configuration node",
+"Both sites independently"
+],
+"兩主站點斷線時，能存取作用中 Quorum Disk 的站點繼續處理交易。",
+"Concept Guide Ch13"
+],
+[
+"How many quorum disks can be elected to resolve a partition into two equal sets of nodes?",
+[
+"Only one",
+"Two",
+"Three",
+"All configured quorum disks"
+],
+"系統最多可設定三個 Quorum Disk，但只有一個會被選來解決兩半相等的分裂情況，其他提供冗餘。",
+"Concept Guide Ch13"
+],
+[
+"What is a restriction on connecting storage systems in a stretched configuration?",
+[
+"Do not connect a storage system in one site directly to a switch fabric in the other site",
+"Storage must connect to all fabrics in both sites",
+"Storage must connect only to the third site",
+"Storage must use iSCSI"
+],
+"不可將一個站點的儲存直接接到另一站點的 Switch Fabric，儲存只接本地站點 Switch。",
+"簡報 S7；Concept Guide Ch13 Restriction"
+],
+[
+"Above what cable distance between production sites can ISL-based configurations see performance impacts?",
+[
+"100 km",
+"10 km",
+"1 km",
+"300 km"
+],
+"使用 ISL 時，若兩生產站點間纜線距離超過 100 km 可能影響效能。",
+"簡報 S7；Concept Guide Ch13"
+],
+[
+"When using ISLs for node-to-node communication, what SAN design is required?",
+[
+"Two SANs, each with two redundant fabrics: a private SAN for node-to-node and a public SAN for hosts and storage",
+"One SAN with one fabric",
+"A single private fabric shared with hosts",
+"Direct attach only"
+],
+"使用 ISL 需建立兩套 SAN，各含兩個冗餘 Fabric：Private SAN 供 Node 間通訊，Public SAN 供 Host 與儲存。",
+"簡報 S7；Concept Guide Ch13"
+],
+[
+"When using two dark fibre links for ISLs, how should fabrics be assigned?",
+[
+"Dedicate one link to each fabric; do not cross-connect",
+"Put both fabrics on one link",
+"Cross-connect both fabrics on both links",
+"Use one link and keep the other idle"
+],
+"兩條 Dark Fibre 時每條專用於一個 Fabric，不要把兩個 Fabric 交叉接到兩條鏈路上。",
+"Concept Guide Ch13"
+],
+[
+"In an enhanced stretched system with ISLs, how should storage systems configured to site 1 or 2 be zoned?",
+[
+"Only to be visible by the nodes in that site",
+"To all nodes at all sites",
+"To no nodes",
+"Only to the third site"
+],
+"Enhanced Configuration 中，Site 1 或 2 的儲存只需 Zone 給該站點 Node；Site 3 或未定義站點的儲存則要 Zone 給所有 Node。",
+"Concept Guide Ch13"
+],
+[
+"For configurations without ISLs, what is the minimum switch requirement per site?",
+[
+"At least one switch per site forming two independent fabrics; a single fabric is not supported",
+"No switches",
+"One switch total",
+"Four switches per site"
+],
+"不使用 ISL 時每站點至少一台 Switch 構成兩個獨立 Fabric，最高可靠度為每站點兩台；不支援單一 Fabric。",
+"簡報 S7"
+],
+[
+"Which extenders can be used in configurations without ISLs?",
+[
+"Active extenders such as DWDM",
+"FCIP between nodes",
+"Copper Ethernet",
+"USB extenders"
+],
+"不使用 ISL 時可用 DWDM 等主動式延伸器；Node 間不支援 FCIP。",
+"簡報 S7"
+],
+[
+"Where in the GUI do you configure an enhanced stretched system?",
+[
+"Monitoring > System > System Actions > Modify System Topology",
+"Settings > Network > Stretched",
+"Pools > Sites",
+"Hosts > Sites"
+],
+"GUI 路徑為 Monitoring > System > System Actions > Modify System Topology，精靈引導完成站點定義。",
+"簡報 S8"
+],
+[
+"During the Modify System Topology wizard, which storage must be added manually?",
+[
+"iSCSI storage",
+"FC storage",
+"Internal drives",
+"Expansion enclosures"
+],
+"精靈會自動偵測 FC 儲存，iSCSI 儲存須手動加入。",
+"簡報 S8"
+],
+[
+"Can site 3 be assigned to a node?",
+[
+"No, site 3 contains only external storage for quorum",
+"Yes",
+"Only for hot spares",
+"Only with ISLs"
+],
+"Site 3 不可指派給 Node，只包含 Quorum 用的外部儲存。",
+"簡報 S8"
+],
+[
+"Which commands add iSCSI storage ports with a site in a stretched system?",
+[
+"detectiscsistorageportcandidate and addiscsistorageport with -site",
+"lsfabric and chcontroller",
+"mkip and rmip",
+"addnode and chnode"
+],
+"iSCSI 儲存以 `detectiscsistorageportcandidate`、`addiscsistorageport` 並指定 -site 加入。",
+"簡報 S8"
+],
+[
+"What characterizes a rolling disaster?",
+[
+"Events whose impact gradually spreads over a longer time",
+"A single instant failure",
+"A planned maintenance",
+"A drive rebuild"
+],
+"Rolling Disaster 指事件影響逐步擴大且歷時較長，例如站點間鏈路先失效，之後取得 Quorum 的站點也失效。",
+"簡報 S9"
+],
+[
+"In a rolling disaster, which node error appears when the remaining site's MDisks stop?",
+[
+"551",
+"550",
+"1220",
+"1246"
+],
+"另一站點的 MDisk 停止時，Node 顯示錯誤 551。",
+"簡報 S9"
+],
+[
+"Who must assist when using the manual quorum override?",
+[
+"IBM Support",
+"Any administrator",
+"The Security Administrator only",
+"No one; it is automatic"
+],
+"Quorum Override 只能在 Support 協助下執行。",
+"簡報 S9"
+],
+[
+"What is required before the quorum override command is available?",
+[
+"chsystem -topology stretched must have been run",
+"Encryption must be enabled",
+"Easy Tier must be off",
+"A FlashSystem grid must exist"
+],
+"需先執行 `chsystem -topology stretched`，Quorum Override 指令才可使用。",
+"簡報 S9"
+],
+[
+"What does the quorum override process do?",
+[
+"Elects a new quorum and creates a new system from the remaining site's nodes",
+"Deletes all volumes",
+"Swaps the primary and secondary sites permanently",
+"Reboots the third site"
+],
+"以 Quorum Override 指令改選新 Quorum，並以剩餘站點的 Node 建立新系統。",
+"簡報 S9"
+],
+[
+"Some nodes show error 550 due to a fabric outage during override. What should be done?",
+[
+"Run the override again on a node that shows 551",
+"Replace the nodes",
+"Ignore the error",
+"Disable the topology"
+],
+"Fabric 中斷可能使部分 Node 顯示 550，可在顯示 551 的 Node 上再執行一次。",
+"簡報 S9"
+],
+[
+"What do quorum disks and IP quorum applications contain in addition to providing a tie-break?",
+[
+"Configuration metadata used to recover the system",
+"Host data",
+"Snapshot data",
+"Audit logs only"
+],
+"Quorum Disk 與 IP Quorum Application 都含有可用於復原系統的 Configuration Metadata。",
+"Concept Guide Ch13"
+],
+[
+"When used with volume mirroring, what does the third-site quorum stretched configuration tolerate?",
+[
+"A failure at a single site",
+"Failure of all sites",
+"Failure of two sites simultaneously",
+"Loss of all quorum devices"
+],
+"搭配 Volume Mirroring，此 Configuration 可容忍單一站點失效，剩餘站點繼續 I/O。",
+"Concept Guide Ch13"
+]
+]
+}

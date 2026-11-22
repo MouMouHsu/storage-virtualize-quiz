@@ -1,0 +1,557 @@
+{
+"id": "CH24",
+"title": "Ansible Collection",
+"zh": "Ansible 自動化",
+"items": [
+[
+"What does the IBM Storage Virtualize Ansible collection provide?",
+[
+"A series of Ansible modules and plugins for interacting with IBM Storage Virtualize family products",
+"A GUI plugin for vCenter",
+"A host multipath driver",
+"A firmware update tool only"
+],
+"Ansible Collection 提供一系列 Ansible Module 與 Plugin，用來與 IBM Storage Virtualize 系列產品互動。",
+"簡報 S3；Concept Guide Ch24"
+],
+[
+"What is the name of the IBM Storage Virtualize collection on Ansible Galaxy?",
+[
+"ibm.storage_virtualize",
+"ibm.spectrum_virtualize_only",
+"ibm.flashsystem_core",
+"redhat.storage"
+],
+"Collection 發佈於 Ansible Galaxy，名稱為 ibm.storage_virtualize。",
+"簡報 S3；Concept Guide Ch24"
+],
+[
+"Where is the official documentation for the collection located?",
+[
+"galaxy.ansible.com under ibm/storage_virtualize/docs",
+"The FlashSystem GUI help only",
+"IBM Fix Central",
+"The service assistant"
+],
+"官方文件位於 galaxy.ansible.com 的 ibm/storage_virtualize/docs。",
+"簡報 S3；Concept Guide Ch24"
+],
+[
+"How do the modules in the IBM Storage Virtualize Ansible collection connect to the storage system?",
+[
+"Through the REST API",
+"Through SNMP",
+"Through FC frames",
+"Through syslog"
+],
+"Collection 的 Module 透過 REST API 連線到 IBM Storage Virtualize 系統。",
+"RedBook 自動化 Ch5.2.5"
+],
+[
+"Which minimum Ansible version is required for IBM Storage Virtualize modules?",
+[
+"2.16",
+"2.9",
+"2.0",
+"3.0"
+],
+"使用 IBM Storage Virtualize Module 需 Ansible 2.16 以上。",
+"RedBook 自動化 Ch5.2.5"
+],
+[
+"Which Python version is required on the Ansible control node?",
+[
+"Python 3.10 or later",
+"Python 2.7",
+"Python 3.6 only",
+"Any Python version"
+],
+"Ansible Control Node 需要 Python 3.10 以上。",
+"RedBook 自動化 Ch5.2.3"
+],
+[
+"Does Ansible require agents on managed nodes?",
+[
+"No, it is agentless",
+"Yes, a daemon on every node",
+"Yes, a Java agent",
+"Only on Windows"
+],
+"Ansible 是 Agentless 架構，不需在被管理節點安裝 Agent 或 Daemon。",
+"RedBook 自動化 Ch5.2.3"
+],
+[
+"Which platform is recommended and officially supported for the Ansible control node?",
+[
+"A Linux distribution",
+"Windows 10 natively",
+"IBM i",
+"z/OS"
+],
+"官方建議的 Control Node 平台為 Linux；WSL 可做基本工作但不一定適合正式環境。",
+"RedBook 自動化 Ch5.2.1"
+],
+[
+"What is Red Hat Ansible Tower now called?",
+[
+"Red Hat Ansible Automation Platform (AAP)",
+"Ansible Core",
+"Ansible Galaxy",
+"Ansible Engine"
+],
+"Red Hat Ansible Tower 已更名為 Red Hat Ansible Automation Platform，其 Automation Controller 取代原 Tower 功能。",
+"RedBook 自動化 Ch5.2.2"
+],
+[
+"What is Ansible Core?",
+[
+"The foundational automation engine providing the CLI framework, modules, and plug-ins",
+"A paid support plan",
+"A storage driver",
+"A GUI for FlashSystem"
+],
+"Ansible Core 是 Ansible 的基礎自動化引擎，提供命令列框架、Module 與 Plug-in。",
+"RedBook 自動化 Ch5.2.2"
+],
+[
+"In Ansible terminology, what is a playbook?",
+[
+"A framework where automation tasks are defined, written in YAML",
+"A compiled binary",
+"A list of hosts only",
+"A log file"
+],
+"Playbook 是以 YAML 撰寫、定義 Ansible 自動化工作的框架。",
+"簡報 S3；RedBook 自動化 Ch5.2.4"
+],
+[
+"In Ansible terminology, what is the inventory?",
+[
+"A file that contains Ansible client and server data",
+"A list of modules",
+"A vault password",
+"A collection version"
+],
+"Inventory 是包含 Ansible Client 與 Server 資料的檔案。",
+"RedBook 自動化 Ch5.2.4"
+],
+[
+"What is a handler in Ansible?",
+[
+"A task that is called only if a notifier is present",
+"A module that collects facts",
+"A password file",
+"A container image"
+],
+"Handler 是只有在有 Notifier 呼叫時才執行的 Task。",
+"RedBook 自動化 Ch5.2.4"
+],
+[
+"What is Ansible Galaxy?",
+[
+"A hub for finding and sharing Ansible content",
+"The control node",
+"A YAML parser",
+"A storage pool"
+],
+"Ansible Galaxy 是尋找與分享 Ansible 內容的平台。",
+"RedBook 自動化 Ch5.2.4"
+],
+[
+"What are roles in Ansible?",
+[
+"A structured way of grouping tasks, handlers, variables, and other properties",
+"User permissions on the storage system",
+"Ownership groups",
+"Network VLANs"
+],
+"Roles 是將 Task、Handler、變數與其他屬性結構化分組的方式。",
+"RedBook 自動化 Ch5.2.4"
+],
+[
+"Which IBM products can the collection manage?",
+[
+"SAN Volume Controller, FlashSystem family, Storwize family, and Storage Virtualize for Public Cloud",
+"Only FlashSystem 9600",
+"Only DS8000",
+"Only tape libraries"
+],
+"可管理 IBM SAN Volume Controller、以 Storage Virtualize 建構的 FlashSystem、Storwize 與 Storage Virtualize for Public Cloud。",
+"RedBook 自動化 Ch5.2.5"
+],
+[
+"Which task is a typical use of Ansible playbooks with IBM Storage Virtualize?",
+[
+"Automating repetitive configuration and management tasks",
+"Replacing drives physically",
+"Zoning without switches",
+"Cooling the data center"
+],
+"適合以 Playbook 將重複的設定與管理工作自動化，提升一致性並降低人為錯誤。",
+"簡報 S3；RedBook 自動化 Ch5.2.5"
+],
+[
+"Which migration workflow is provided as a sample playbook in the collection?",
+[
+"HyperSwap to policy-based HA migration",
+"RAID 5 to RAID 6 conversion",
+"Tape to disk migration",
+"Mainframe to cloud migration"
+],
+"範例 Playbook 包含 HyperSwap 移轉到 Policy-based HA、GM 與 GMCV 移轉到 Policy-based Replication 等流程。",
+"RedBook 自動化 Ch5.2.5"
+],
+[
+"What must be installed to use the ibm_svctask_command and ibm_svcinfo_command modules?",
+[
+"Paramiko",
+"PowerShell",
+"Java",
+"Node.js"
+],
+"使用 ibm_svctask_command 與 ibm_svcinfo_command 需安裝 Paramiko (Python 的 SSHv2 實作)。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"How do the ibm_svcinfo_command and ibm_svctask_command modules run commands?",
+[
+"Over an SSH session",
+"Over SNMP",
+"Over syslog",
+"Over FC"
+],
+"這兩個 Module 透過 SSH Session 在系統上執行 svcinfo 與 svctask CLI 指令。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"What can happen when querying more than 2,000 objects through the REST API?",
+[
+"API service stability can be affected and the service might restart",
+"It is always faster",
+"The system shuts down",
+"The GUI is disabled"
+],
+"透過 REST API 查詢超過 2,000 個物件可能影響 API 服務穩定性，服務可能因記憶體限制自動重啟。",
+"RedBook 自動化 Ch5.2.6 Current limitations"
+],
+[
+"Is REST API access through a cluster IPv6 address supported by the collection?",
+[
+"No",
+"Yes",
+"Only for queries",
+"Only with Vault"
+],
+"不支援透過叢集 IPv6 位址存取 REST API。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"For which systems is automated acceptance of license agreements (EULA) supported?",
+[
+"Licensed Machine Code (LMC) systems only",
+"All systems",
+"Non-LMC systems only",
+"No systems"
+],
+"自 1.8.0 起自動接受 EULA 只支援 LMC 系統，非 LMC 系統須於 GUI 首次登入精靈接受。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"Which minimum IBM Storage Virtualize software version is required to use the collection?",
+[
+"8.1.3, excluding 8.3.1.3, 8.3.1.4, and 8.3.1.5",
+"7.0.0",
+"9.0.0",
+"8.6.0 only"
+],
+"需 8.1.3 以上，但排除 8.3.1.3、8.3.1.4 與 8.3.1.5。",
+"RedBook 自動化 Ch5.2.6 Prerequisites"
+],
+[
+"Which command installs the collection from Ansible Galaxy?",
+[
+"ansible-galaxy collection install ibm.storage_virtualize",
+"pip install ibm.storage_virtualize",
+"ansible-playbook install ibm",
+"yum install storage_virtualize"
+],
+"以 `ansible-galaxy collection install ibm.storage_virtualize` 安裝；加上 --force 可升級。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"How do you upgrade the collection to the latest version?",
+[
+"Add --force to the ansible-galaxy collection install command",
+"Run ansible-galaxy upgrade",
+"Delete and reinstall Ansible",
+"Use pip upgrade"
+],
+"以 `ansible-galaxy collection install ibm.storage_virtualize --force` 升級。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"Which network access is required from the controller node?",
+[
+"To the IBM Storage Virtualize management IP",
+"To every host",
+"To the FC switches only",
+"To the IP quorum only"
+],
+"Controller Node 必須能連到 IBM Storage Virtualize 的 Management IP。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"Which module generates an authentication token for a user?",
+[
+"ibm_svc_auth",
+"ibm_svc_manage_user",
+"ibm_svc_info",
+"ibm_sv_manage_security"
+],
+"ibm_svc_auth 為使用者產生驗證 Token。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module completes the initial setup for LMC systems?",
+[
+"ibm_svc_complete_initial_setup",
+"ibm_svc_initial_setup",
+"ibm_svc_info",
+"ibm_svc_manage_callhome"
+],
+"ibm_svc_complete_initial_setup 完成 LMC 系統的初始設定；非 LMC 系統需登入 GUI 完成 Day 0。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages standard volumes?",
+[
+"ibm_svc_manage_volume",
+"ibm_svc_vdisk",
+"ibm_svc_vol_map",
+"ibm_svc_mdisk"
+],
+"ibm_svc_manage_volume 管理 Standard Volume；ibm_svc_vdisk 自 1.6.0 起已淘汰。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module is deprecated starting with version 1.6.0?",
+[
+"ibm_svc_vdisk",
+"ibm_svc_manage_volume",
+"ibm_svc_host",
+"ibm_svc_info"
+],
+"自 1.6.0 起 ibm_svc_vdisk 視為淘汰，改用 ibm_svc_manage_volume。",
+"RedBook 自動化 Note"
+],
+[
+"Which module manages volume mappings to hosts?",
+[
+"ibm_svc_vol_map",
+"ibm_svc_host",
+"ibm_svc_hostcluster",
+"ibm_sv_manage_clone"
+],
+"ibm_svc_vol_map 管理 Volume 對 Host 的 Mapping。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages FlashSystem grid operations?",
+[
+"ibm_sv_manage_flashsystem_grid",
+"ibm_sv_manage_storage_partition",
+"ibm_svc_manage_portset",
+"ibm_sv_manage_fc_partnership"
+],
+"ibm_sv_manage_flashsystem_grid 管理 FlashSystem Grid 作業。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages storage partitions?",
+[
+"ibm_sv_manage_storage_partition",
+"ibm_svc_manage_ownershipgroup",
+"ibm_svc_mdiskgrp",
+"ibm_svc_manage_volumegroup"
+],
+"ibm_sv_manage_storage_partition 管理 Storage Partition。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages policy-based replication configuration?",
+[
+"ibm_sv_manage_replication_policy",
+"ibm_svc_manage_replication",
+"ibm_svc_manage_cv",
+"ibm_svc_start_stop_replication"
+],
+"ibm_sv_manage_replication_policy 管理 Policy-based Replication；ibm_svc_manage_replication 管理 Remote Copy。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module switches the replication direction?",
+[
+"ibm_sv_switch_replication_direction",
+"ibm_svc_start_stop_replication",
+"ibm_sv_manage_replication_policy",
+"ibm_svc_manage_replicationgroup"
+],
+"ibm_sv_switch_replication_direction 切換 Replication 方向。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages snapshot policies?",
+[
+"ibm_sv_manage_snapshotpolicy",
+"ibm_sv_manage_snapshot",
+"ibm_svc_manage_flashcopy",
+"ibm_svc_manage_safeguarded_policy"
+],
+"ibm_sv_manage_snapshotpolicy 管理 Snapshot Policy；ibm_sv_manage_snapshot 管理 Snapshot。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module manages clones and thin-clones of volumes and volume groups?",
+[
+"ibm_sv_manage_clone",
+"ibm_svc_manage_flashcopy",
+"ibm_sv_manage_snapshot",
+"ibm_svc_manage_mirrored_volume"
+],
+"ibm_sv_manage_clone 管理 Volume 與 Volume Group 的 Clone 與 Thin-clone。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"Which module collects information about the IBM Storage Virtualize system?",
+[
+"ibm_svc_info",
+"ibm_svc_auth",
+"ibm_svcinfo_command only",
+"ibm_sv_manage_security"
+],
+"ibm_svc_info 用於收集系統資訊，可自動化並簡化資訊蒐集。",
+"RedBook 自動化 Table 5-1"
+],
+[
+"In the ibm_svc_info module, which parameter specifies the list of entity types to retrieve?",
+[
+"gather_subset",
+"command_list",
+"objectname",
+"filtervalue"
+],
+"gather_subset 指定要取得資訊的 Storage Virtualize 物件類型清單。",
+"RedBook 自動化 ibm_svc_info Key parameters"
+],
+[
+"Which ibm_svc_info parameter lets you run svcinfo commands not yet part of gather_subset, such as lspartnershipcandidate?",
+[
+"command_list",
+"gather_subset",
+"objectname",
+"log_path"
+],
+"command_list 可直接指定尚未納入 gather_subset 的 svcinfo 指令。",
+"RedBook 自動化 ibm_svc_info"
+],
+[
+"Which ibm_svc_info parameter returns only objects that match attribute values?",
+[
+"filtervalue",
+"objectname",
+"gather_subset",
+"domain"
+],
+"filtervalue 指定一或多個篩選條件，只顯示符合的物件，可減少網路用量與 Playbook 解析。",
+"RedBook 自動化 ibm_svc_info"
+],
+[
+"What happens when gather_subset and objectname are both set to all?",
+[
+"The module returns detailed output for all objects across all supported entities",
+"It fails",
+"It returns only system info",
+"It returns nothing"
+],
+"兩者都設為 all 時，會輸出所有支援物件類型的全部物件詳細資訊。",
+"RedBook 自動化 ibm_svc_info Advantages"
+],
+[
+"How does ibm_svc_info handle entities not supported by the current code level?",
+[
+"It returns a null value instead of failing",
+"It aborts the playbook",
+"It upgrades the system",
+"It raises an alert"
+],
+"遇到目前版本不支援的物件時回傳 null 而非失敗，確保自動化流程不中斷 (向下相容)。",
+"RedBook 自動化 ibm_svc_info"
+],
+[
+"Which filtervalue retrieves only drives in candidate state?",
+[
+"use=candidate",
+"state=candidate",
+"status:candidate",
+"drive=candidate"
+],
+"範例 5-5 以 gather_subset: drive 與 filtervalue: \"use=candidate\" 取得 candidate 狀態的 Drive。",
+"RedBook 自動化 Example 5-5"
+],
+[
+"Which command shows online documentation for a specific module?",
+[
+"ansible-doc <collection-name>.<module-name>",
+"ansible-help <module>",
+"man ansible-module",
+"ansible-galaxy doc"
+],
+"以 `ansible-doc` 加 Collection 與 Module 名稱顯示說明與範例。",
+"RedBook 自動化 Ch5.2.6"
+],
+[
+"What is the default buffer size for thin-provisioned and compressed volumes in ibm_svc_manage_volume?",
+[
+"2%",
+"10%",
+"0%",
+"50%"
+],
+"buffersize 預設為 2%，需搭配 thin 或 compressed 參數使用。",
+"RedBook 自動化 Example 5-8"
+],
+[
+"Which Ansible feature protects sensitive data such as storage credentials?",
+[
+"Ansible Vault",
+"Ansible Galaxy",
+"Ansible facts",
+"Ansible roles"
+],
+"Ansible Vault 以加密檔案保存帳密等敏感資料，避免以明碼存放。",
+"RedBook 自動化 Ch5.2.7"
+],
+[
+"Which command creates an encrypted variable file?",
+[
+"ansible-vault create secrets.yml",
+"ansible-galaxy create secrets.yml",
+"ansible-doc secrets.yml",
+"ansible-encrypt secrets.yml"
+],
+"以 `ansible-vault create secrets.yml` 建立加密的變數檔。",
+"RedBook 自動化 Ch5.2.7"
+],
+[
+"Which file can be configured to use SCP instead of SFTP for module transfer?",
+[
+"ansible.cfg",
+"inventory.yml",
+"secrets.yml",
+"hosts.ini"
+],
+"若 SSH 可用但 SFTP 不支援，可在 ansible.cfg 設定改用 SCP。",
+"RedBook 自動化 Ch5.2.3"
+]
+]
+}

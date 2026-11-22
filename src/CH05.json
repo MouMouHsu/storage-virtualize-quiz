@@ -1,0 +1,557 @@
+{
+"id": "CH05",
+"title": "Hosts",
+"zh": "Host 管理",
+"items": [
+[
+"What is a host object?",
+[
+"A logical object that represents a collection of host ports",
+"A physical server inside the storage enclosure",
+"A volume mapped to a server",
+"A group of node ports"
+],
+"Host Object 是代表一組 Host Port 的邏輯物件，通常一台伺服器對應一個 Host Object。",
+"簡報 S3；Concept Guide Ch5"
+],
+[
+"Which port identifier format is used for Fibre Channel and SAS hosts?",
+[
+"WWPN",
+"NQN",
+"IQN",
+"EUI"
+],
+"FC 與 SAS Host 使用 WWPN；NVMe 使用 NQN；iSCSI 使用 IQN 或 EUI。",
+"簡報 S3；Concept Guide Ch5"
+],
+[
+"Which identifier format is used for NVMe over TCP hosts?",
+[
+"NQN",
+"WWPN",
+"IQN",
+"MAC address"
+],
+"FC-NVMe、NVMe over RDMA 與 NVMe over TCP Host 皆使用 NVMe Qualified Name (NQN)。",
+"簡報 S3；Concept Guide Ch5"
+],
+[
+"Which identifiers can iSCSI hosts use?",
+[
+"IQN or EUI",
+"WWPN or WWNN",
+"NQN only",
+"UUID only"
+],
+"iSCSI Host 的 Port 以 iSCSI Qualified Name (IQN) 或 Extended Unique Identifier (EUI) 表示。",
+"簡報 S3；Concept Guide Ch5"
+],
+[
+"What is the typical configuration for host objects?",
+[
+"One host object for each server attached to the storage system",
+"One host object for all servers in a data center",
+"One host object per volume",
+"One host object per switch"
+],
+"一般 Configuration 是每台連接的伺服器對應一個 Host Object；多台共用儲存時可組成 Host Cluster。",
+"Concept Guide Ch5"
+],
+[
+"Where can WWPNs that are logged in but not yet configured in host objects be seen in the GUI?",
+[
+"Hosts > Hosts > Unconfigured hosts",
+"Settings > Network > Ports",
+"Monitoring > Events",
+"Pools > External Storage"
+],
+"系統偵測到已登入但未設定的 WWPN 會顯示在 Hosts > Hosts > Unconfigured hosts。",
+"簡報 S4；Concept Guide Ch5"
+],
+[
+"Why might an HBA port not appear as an unconfigured host?",
+[
+"Some HBA drivers do not leave ports logged in if no disks are detected",
+"The port must first be added to a portset",
+"The port must be in a host cluster",
+"The system only shows NVMe ports"
+],
+"部分 HBA Driver 在偵測不到磁碟時不會保持 Port 登入，因此可能看不到；可手動輸入 WWPN。",
+"簡報 S4；Concept Guide Ch5"
+],
+[
+"When configuring VMware hosts, what is recommended?",
+[
+"Define each host as a separate host object and do not combine WWPNs from multiple hosts",
+"Combine all ESXi WWPNs into one host object",
+"Use one host object per datastore",
+"Use a single NQN for all hosts"
+],
+"VMware 等環境要每台 Host 各自一個 Host Object，不要把多台 Host 的 WWPN 合併成一個 Host Object。",
+"簡報 S4；Concept Guide Ch5"
+],
+[
+"Which CLI command creates a host object?",
+[
+"mkhost",
+"addhost",
+"mkhostport",
+"crhost"
+],
+"`mkhost` 建立 Host Object；`addhostport` 新增 Port；`rmhost` 刪除 Host Object。",
+"簡報 S4；Concept Guide Ch5"
+],
+[
+"What does FDMI enable?",
+[
+"A storage endpoint to register with the FC fabric and query HBA and port details of the fabric",
+"Encryption of FC frames",
+"Automatic zoning of all ports",
+"NVMe namespace discovery over TCP"
+],
+"Fabric Device Management Interface (FDMI) 讓儲存端點註冊到 FC Fabric 並查詢整個 Fabric 的 HBA 與 Port 資訊。",
+"Concept Guide Ch5"
+],
+[
+"Host mapping is similar in concept to which technique?",
+[
+"LUN mapping or masking",
+"Zoning",
+"RAID striping",
+"Volume mirroring"
+],
+"Host Mapping 概念類似 LUN Mapping 或 Masking，差別在於它是在軟體層執行。",
+"簡報 S6；Concept Guide Ch5 Mapping volumes to a host"
+],
+[
+"If a volume is mapped to more than one host, what is required?",
+[
+"All those hosts must use the same storage protocol (SCSI or NVMe)",
+"All hosts must be in the same portset",
+"All hosts must use iSCSI",
+"All hosts must have the same SCSI ID range"
+],
+"同一 Volume 映射到多台 Host 時，這些 Host 必須使用相同的儲存協定 (SCSI 或 NVMe)。",
+"簡報 S6；Concept Guide Ch5 Note"
+],
+[
+"Is mapping a volume to the same server by using different transport protocols supported?",
+[
+"No",
+"Yes, for load balancing",
+"Yes, only with NVMe",
+"Yes, only in a host cluster"
+],
+"同一台伺服器以不同傳輸協定 (例如 FC 與 Ethernet) 映射同一 Volume 不受支援；不同伺服器使用不同協定則可以。",
+"簡報 S6；Concept Guide Ch5 Note"
+],
+[
+"What does the optional SCSI ID control when mapping a volume?",
+[
+"The sequence in which volumes are presented to the host",
+"The volume's cache mode",
+"The volume's I/O group",
+"The extent size"
+],
+"SCSI ID 控制 Volume 呈現給 Host 的順序；未指定時系統自動指派最小可用 SCSI ID。",
+"簡報 S6；Concept Guide Ch5"
+],
+[
+"If volumes are presented with SCSI IDs 0, 1, and 3, what might happen?",
+[
+"The volume with ID 3 might not be found because no disk is mapped with ID 2",
+"All volumes are renumbered automatically",
+"The host rejects ID 0",
+"Nothing; gaps are always supported"
+],
+"部分 Host 軟體要求連續的 SCSI ID；若缺少 ID 2，ID 3 的 Volume 可能找不到。",
+"Concept Guide Ch5"
+],
+[
+"What is a shared mapping?",
+[
+"A volume mapping shared among all hosts in a host cluster",
+"A mapping that uses two protocols",
+"A mapping between two volumes",
+"A mapping that is read-only"
+],
+"Shared Mapping 是 Host Cluster 內所有 Host 共用的 Volume Mapping；Private Mapping 只屬於單一 Host。",
+"簡報 S5、S6；Concept Guide Ch5"
+],
+[
+"Where can you filter mappings by Shared or Private type in the GUI?",
+[
+"Hosts > Mappings, using the Mapping type column",
+"Volumes > Volumes by Host",
+"Settings > Host Settings",
+"Monitoring > System"
+],
+"Hosts > Mappings 表格可用 Mapping type 欄位篩選 Shared 或 Private。",
+"簡報 S6；Concept Guide Ch5"
+],
+[
+"If there are multiple paths to a volume, what does the system require on the host?",
+[
+"Multipathing software",
+"A dedicated host cluster",
+"A separate portset for each path",
+"Volume mirroring"
+],
+"多重路徑時，Host 端必須執行 Multipathing 軟體，將多條路徑整合成一個儲存裝置呈現給作業系統。",
+"簡報 S6；Concept Guide Ch5"
+],
+[
+"What is the default and recommended mapping behavior?",
+[
+"Map only the volumes that the host is required to access",
+"Map all volumes to every host and use host LUN masking",
+"Map volumes only to host clusters",
+"Map every volume to the first host"
+],
+"系統雖可支援全映射再由 Host 端 LUN Masking，但預設且建議的做法是只映射 Host 需要存取的 Volume。",
+"Concept Guide Ch5"
+],
+[
+"From which objects do host mappings inherit their ownership group?",
+[
+"The host or host cluster and the volume in the mapping",
+"The pool only",
+"The portset",
+"The I/O group"
+],
+"Host Mapping 會繼承 Mapping 中 Host (或 Host Cluster) 與 Volume 的 Ownership Group。",
+"Concept Guide Ch5"
+],
+[
+"Which command lists the host mappings for a host so that you can match the volume UID?",
+[
+"lshostvdiskmap",
+"lsvdiskhostmap",
+"lshostport",
+"lsmapping"
+],
+"先用 `lshost` 比對 WWPN 找出 Host Object，再用 `lshostvdiskmap` 列出 Mapping 比對 Volume UID。",
+"簡報 S7；Concept Guide Ch5 Determining the volume name"
+],
+[
+"With the native multipathing plug-in, which command shows the vpath serial number?",
+[
+"datapath query device",
+"lsvpath",
+"multipath -ll",
+"esxcli storage nmp device list"
+],
+"使用 NMP 時，以 `datapath query device` 找出 vpath 序號作為 Device Identifier。",
+"簡報 S7；Concept Guide Ch5"
+],
+[
+"What is the purpose of SCSI Reserve and Persistent Reserve commands?",
+[
+"To prevent ports in other servers from accessing particular LUNs",
+"To reserve capacity in a pool",
+"To reserve bandwidth for replication",
+"To reserve SCSI IDs for future mappings"
+],
+"SCSI Reserve 與 Persistent Reserve 讓伺服器阻止其他伺服器的 Port 存取特定 LUN，避免意外覆寫，Cluster 軟體常用。",
+"簡報 S7；Concept Guide Ch5 Volume reservations"
+],
+[
+"What happens to reservations when a server is not shut down in a controlled way?",
+[
+"The reservations are maintained",
+"The reservations are released automatically",
+"The volume goes offline",
+"The host object is deleted"
+],
+"伺服器異常中斷時，Standard 與 Persistent Reservation 會被保留，可能阻止其他伺服器存取。",
+"簡報 S7；Concept Guide Ch5"
+],
+[
+"What is the preferred way to release a reservation?",
+[
+"Have the server that holds the reservation explicitly release it",
+"Reboot the storage system",
+"Delete the volume",
+"Change the SCSI ID"
+],
+"最好由持有 Reservation 的伺服器明確釋放，以確保伺服器 Cache 已寫回；無法時才用作業系統工具。",
+"Concept Guide Ch5 Volume reservations"
+],
+[
+"Which system action can remove the reservations a host has on a volume?",
+[
+"Removing the host mapping with rmvdiskhostmap or the GUI",
+"Running lsvdisk",
+"Changing the volume name",
+"Enabling Easy Tier"
+],
+"以 `rmvdiskhostmap` 或 GUI 移除 Host Mapping 時，Node 可移除該 Host 在 Volume 上的 Reservation。",
+"簡報 S7；Concept Guide Ch5"
+],
+[
+"What does a host portset define?",
+[
+"The set of node ports that a host can use to communicate with the system",
+"The set of volumes a host can map",
+"The set of users who manage a host",
+"The set of switches in a fabric"
+],
+"Host Portset 定義 Host 可用來與系統通訊的 Node Port 集合，用於控制存取、Isolation 工作負載與提供可預期連線。",
+"簡報 S8；Concept Guide Ch5 Host portsets"
+],
+[
+"How many portsets can a host object be assigned to?",
+[
+"Only one",
+"Up to four",
+"Up to 64",
+"Unlimited"
+],
+"一個 Host 只能指派一個 Portset，一個 Portset 可包含多台 Host；未指派時使用 Default Portset。",
+"簡報 S8；Concept Guide Ch5"
+],
+[
+"Which hosts cannot use the default portset?",
+[
+"NVMe-FC hosts",
+"iSCSI hosts",
+"SAS hosts",
+"SCSI FC hosts"
+],
+"NVMe-FC Host 不能使用 Default Portset，必須使用自訂的 Fibre Channel Portset。",
+"簡報 S8；Concept Guide Ch5"
+],
+[
+"How many IP addresses per node can an Ethernet host portset include?",
+[
+"Up to four",
+"Up to two",
+"Up to eight",
+"Only one"
+],
+"Ethernet Host Portset 每個 Node 最多 4 個 IP Address，且加入 Host 前須至少有一個 IP。",
+"簡報 S8；Concept Guide Ch5 Ethernet portset requirements"
+],
+[
+"Can host attach IP addresses within a single portset be on different VLANs or subnets?",
+[
+"Yes",
+"No, they must share one subnet",
+"No, they must share one VLAN",
+"Only for NVMe over TCP"
+],
+"官方說明同一 Portset 內的 Host Attach IP 可以位於不同 VLAN 或子網路。",
+"Concept Guide Ch5 Ethernet portset requirements"
+],
+[
+"For Ethernet multipathing support, how should IP addresses be configured?",
+[
+"Symmetrically, using the same port number on both nodes, such as node1 port3 and node2 port3",
+"On a single node only",
+"On different port numbers on each node",
+"On management ports only"
+],
+"在兩個 Node 以相同 Port 編號對稱設定 IP，確保 Failover、Failback 與負載平衡。",
+"簡報 S8；Concept Guide Ch5"
+],
+[
+"How many unique routable IP addresses with a gateway does each physical port support?",
+[
+"One",
+"Two",
+"Four",
+"Eight"
+],
+"每個實體 Port 支援一個帶 Gateway 的唯一可路由 IP，該 IP 可在多個 Portset 中引用。",
+"簡報 S8；Concept Guide Ch5"
+],
+[
+"Which command shows connectivity for Fibre Channel-attached hosts?",
+[
+"lsfabric",
+"lsnvmefabric",
+"lshostiplogin",
+"lsportip"
+],
+"FC Host 連線可用 GUI 的 Settings > Network > Fibre Channel Connectivity 或 `lsfabric` 查看。",
+"簡報 S9；Concept Guide Ch5 Host connectivity"
+],
+[
+"Which command shows connectivity for NVMe over TCP hosts?",
+[
+"lsnvmefabric",
+"lsfabric",
+"lshostiplogin",
+"lsiscsiauth"
+],
+"FC-NVMe、NVMe over RDMA 與 NVMe over TCP Host 使用 Settings > Network > NVMe Connectivity 或 `lsnvmefabric`。",
+"簡報 S9；Concept Guide Ch5"
+],
+[
+"Which command lists login session details for an Ethernet-attached iSCSI host?",
+[
+"lshostiplogin",
+"lsfabric",
+"lsnvmefabric",
+"lsportethernet"
+],
+"`lshostiplogin` 列出 Host 登入系統 Ethernet Port 的 Session 資訊；GUI 為 Hosts > Hosts > IP Login Information。",
+"簡報 S9；Concept Guide Ch5"
+],
+[
+"For Ethernet-attached hosts, why can the number of logged-in nodes exceed the number of nodes?",
+[
+"Because it counts sessions created between hosts and nodes",
+"Because it includes spare nodes",
+"Because it counts switches",
+"Because it counts volumes"
+],
+"Ethernet Host 的 logged-in Node 數代表 Host 與 Node 間建立的 Session 數，因此可能大於實際 Node 數。",
+"Concept Guide Ch5 Host connectivity"
+],
+[
+"With the Complete status policy, when does a host display Online?",
+[
+"Only when all host ports are logged in to all nodes and the host can access all mapped volumes",
+"When at least one port is logged in",
+"When a sufficient number of logins exist to keep access",
+"When the host is in a host cluster"
+],
+"Complete 要求所有 Host Port 登入所有 Node 且可存取全部映射 Volume；任一失去連線即顯示 Degraded。",
+"簡報 S9；Concept Guide Ch5"
+],
+[
+"With the Redundant status policy, when does a host display Online?",
+[
+"When enough port-to-node logins exist to retain access to all mapped volumes, even if one port or node is lost",
+"Only when all ports log in to all nodes",
+"When any single login exists",
+"Never; it always shows Degraded"
+],
+"Redundant 只要保有足夠登入可維持存取所有映射 Volume，即使少一個 Port 或 Node 也顯示 Online。",
+"簡報 S9；Concept Guide Ch5"
+],
+[
+"In a multiple-site configuration, what does selecting Local for Site Status mean?",
+[
+"Host status relates only to connectivity to nodes on the local site",
+"Host status includes all sites",
+"The host is moved to the local site",
+"Remote nodes are disabled"
+],
+"Site Status 選 Local 時，Host 狀態只考量對本地站點 Node 的連線；選 All 則包含所有站點。",
+"Concept Guide Ch5 Host connectivity"
+],
+[
+"What is the maximum number of hosts in a host cluster?",
+[
+"128",
+"64",
+"256",
+"32"
+],
+"一個 Host Cluster 最多可包含 128 台 Host。",
+"簡報 S10；Concept Guide Ch5 Host clusters"
+],
+[
+"How many host clusters can a host belong to at the same time?",
+[
+"Only one",
+"Two",
+"Four",
+"Unlimited"
+],
+"一台 Host 同一時間只能屬於一個 Host Cluster。",
+"簡報 S10；Concept Guide Ch5"
+],
+[
+"What does the host cluster status Host cluster degraded mean?",
+[
+"At least one host is offline and at least one host is online or degraded",
+"All hosts are offline",
+"All hosts are online or degraded",
+"The host cluster has no hosts"
+],
+"Host cluster degraded 表示至少一台 Host Offline，且至少一台 Online 或 Degraded；Host degraded 則是全部 Online 或 Degraded。",
+"簡報 S10；Concept Guide Ch5"
+],
+[
+"When hosts are added to a new host cluster, what happens to their common private mappings?",
+[
+"They become shared mappings for the host cluster",
+"They are deleted",
+"They remain private for all hosts",
+"They are converted to read-only"
+],
+"建立 Host Cluster 並加入 Host 時，共同的 Private Mapping 會變成 Shared Mapping，也可排除特定 Volume。",
+"簡報 S10；Concept Guide Ch5 Managing host clusters"
+],
+[
+"What happens to mappings that have SCSI ID conflicts when hosts are added to a host cluster?",
+[
+"They are retained as private mappings to the original hosts",
+"They are deleted",
+"They are assigned new SCSI IDs automatically",
+"The hosts are rejected from the cluster"
+],
+"有 SCSI ID 衝突的 Mapping 不會加入 Host Cluster，而是保留為原 Host 的 Private Mapping。",
+"簡報 S10；Concept Guide Ch5"
+],
+[
+"What must be done if throttles are configured on a host that you want to add to a host cluster?",
+[
+"Remove the host throttles; throttles can apply only to the host cluster",
+"Nothing; host throttles are merged",
+"Double the throttle limits",
+"Convert the throttle to a pool throttle"
+],
+"Throttle 只能套用在 Host Cluster，不能套用在 Cluster 內個別 Host；不移除 Throttle 的 Host 會被排除。",
+"簡報 S10；Concept Guide Ch5"
+],
+[
+"When removing a host from a host cluster and converting shared mappings to private mappings, what happens to volume access?",
+[
+"Access is retained and the SCSI ID remains unchanged",
+"Access is lost immediately",
+"The SCSI ID is reset to 0",
+"The volume is unmapped from all hosts"
+],
+"轉為 Private Mapping 時 Volume 仍映射給該 Host，SCSI ID 不變，存取不中斷。",
+"Concept Guide Ch5 Managing host clusters"
+],
+[
+"Which command lists candidate Fibre Channel HBA ports after replacing an HBA?",
+[
+"lsfcportcandidate",
+"lshostport",
+"lsportfc",
+"lsfabric -candidate"
+],
+"更換 HBA 後以 `lsfcportcandidate` (SAS 為 `lssasportcandidate`) 列出候選 Port，再以 `addhostport` 加入、`rmhostport` 移除舊 Port。",
+"簡報 S11；Concept Guide Ch5 Managing WWPN changes"
+],
+[
+"When volume protection is enabled, when does deleting a host port fail?",
+[
+"When it is the last active port on the host and is mapped to a volume that received recent I/O",
+"When the host has more than two ports",
+"When the port is an NVMe port",
+"When the host is in a portset"
+],
+"啟用 Volume Protection 時，若該 Port 是 Host 最後一個作用中 Port 且映射的 Volume 近期有 I/O，刪除會失敗。",
+"簡報 S11；Concept Guide Ch5 Note"
+],
+[
+"Which CLI command creates a host throttle?",
+[
+"mkthrottle -type host",
+"mkhostthrottle",
+"chhost -throttle",
+"mkthrottle -type vdisk"
+],
+"Host Throttle 控制特定 Host 或 Host Cluster 的 I/O 資源，CLI 為 `mkthrottle -type host`，GUI 為 Edit Throttle。",
+"簡報 S11"
+]
+]
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CH20 Support - Quiz</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><div><h1 id="title">CH20 Support</h1><div class="sub" id="sub"></div></div><a href="index.html">← 回章節列表</a></div></header>
+<div class="bar"><div class="wrap">
+  <span class="stat" id="st"></span>
+  <div class="prog"><i id="pg"></i></div>
+  <label class="tog"><input type="checkbox" id="shuffle">題目與選項隨機排序</label>
+  <button id="submit" class="primary">全部交卷</button>
+  <button id="reset">重新開始</button>
+</div></div>
+<main><div class="wrap">
+  <p class="intro">選擇答案後按「作答」，即可看到對錯與中文說明；也可以直接按「直接看答案」(不計分)。作答紀錄會保存在這台裝置的瀏覽器中。</p>
+  <div class="result" id="result"></div>
+  <div id="list"></div>
+</div></main>
+<footer>依據 IBM Storage Virtualize V9.2.0 Concept Guide 與 MouMou Hsu 章節簡報整理 · 僅供學習自測</footer>
+<script src="data/ch20.js"></script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

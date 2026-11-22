@@ -1,0 +1,557 @@
+{
+"id": "CH15",
+"title": "Notifications",
+"zh": "通知設定",
+"items": [
+[
+"Which mechanisms does the system use to notify you and IBM Support when significant events are detected?",
+[
+"SNMP traps, syslog messages, and Call Home emails",
+"Only SMS messages",
+"Only GUI pop-ups",
+"Only REST webhooks"
+],
+"系統以 SNMP Trap、Syslog 與 Call Home Email 通知管理者與 IBM Support。",
+"簡報 S1、S4；Concept Guide Ch15"
+],
+[
+"Up to how many syslog servers and SNMP servers can events be sent to?",
+[
+"Up to 6 syslog servers and up to 6 SNMP servers",
+"Up to 2 of each",
+"Up to 12 of each",
+"Unlimited"
+],
+"系統 Event 可傳送到最多 6 台 Syslog Server 與最多 6 個 SNMP Server。",
+"簡報 S3；Concept Guide Ch15"
+],
+[
+"What is an alert in the event log?",
+[
+"An event that requires action",
+"An expected state change",
+"A message that has expired",
+"A successful login"
+],
+"Alert 需要採取行動；有 Error Code 者對應 Fix Procedure，沒有 Error Code 者代表非預期狀態變化，必須調查。",
+"簡報 S4"
+],
+[
+"Which is an example of a message event?",
+[
+"A FlashCopy operation completed",
+"A drive failed",
+"A node went offline",
+"A pool went offline"
+],
+"Message 是預期中的狀態變化，例如 FlashCopy 作業完成。",
+"簡報 S4"
+],
+[
+"Which error code has higher priority: 1020 or 1370?",
+[
+"1020, because lower error codes have higher priority",
+"1370, because higher codes have higher priority",
+"They have the same priority",
+"Priority is not related to code"
+],
+"Error Code 越小優先序越高，因此 1020 高於 1370。",
+"簡報 S4"
+],
+[
+"How are notification types displayed in the event log?",
+[
+"Error and Warning as Alert; Information as Message",
+"All as Alert",
+"All as Message",
+"Error as Alert; Warning and Information as Message"
+],
+"通知類型 Error 與 Warning 顯示為 Alert，Information 顯示為 Message。",
+"簡報 S4"
+],
+[
+"When are events generated during a recommended service action notified?",
+[
+"Only if they remain unfixed after the action completes",
+"Immediately",
+"Never",
+"Every hour"
+],
+"進行 Recommended Service Action 期間產生的 Event，只有在動作結束後仍未修復時才通知。",
+"簡報 S4"
+],
+[
+"Do most CLI response messages generate notifications?",
+[
+"No, only events recorded in the event log generate notifications",
+"Yes, all CLI responses",
+"Only error responses",
+"Only for the superuser"
+],
+"只有記錄在 Event Log 的 Event 才會通知，多數 CLI 回應訊息不會產生通知。",
+"簡報 S4"
+],
+[
+"Which command displays the event log?",
+[
+"lseventlog",
+"lsauditlog",
+"lslog",
+"lsevents"
+],
+"Event Log 可在 Monitoring > Events 或以 `lseventlog` 檢視。",
+"簡報 S4"
+],
+[
+"What does the Monitoring status in the event log mean?",
+[
+"The event does not yet require action",
+"The event has expired",
+"The event is an alert requiring a fix procedure",
+"The event is a message"
+],
+"Monitoring 表示尚不需處理；Alert 依 Fix Procedure 處理後轉綠；Expired 表示已不再是問題。",
+"簡報 S5"
+],
+[
+"What does the Event count field indicate?",
+[
+"The number of events merged into the log entry",
+"The total events on the system",
+"The number of nodes reporting",
+"The number of alerts per hour"
+],
+"Event Log 容量有限，重複 Event 會合併，Event count 為合併數量，並保留第一次與最後一次時間。",
+"簡報 S5"
+],
+[
+"What should you handle first according to the Root sequence number field?",
+[
+"The root event that might have caused this event",
+"The newest event",
+"The event with the highest count",
+"The event from the configuration node"
+],
+"Root sequence number 指出可能引發此 Event 的根本 Event，應先處理 Root Event。",
+"簡報 S5"
+],
+[
+"Is the reporting node always the node where the object resides?",
+[
+"No",
+"Yes",
+"Only for drives",
+"Only for hosts"
+],
+"Reporting node 是回報該 Event 的 Node，不一定是 Object 所在的 Node。",
+"簡報 S5"
+],
+[
+"Do all events have an error code?",
+[
+"No",
+"Yes",
+"Only messages",
+"Only alerts on nodes"
+],
+"Error Code 指出要執行的 Fix Procedure 或 Service Action，需要相同處理的 Event 共用同一 Code，但不是每個 Event 都有。",
+"簡報 S5"
+],
+[
+"Which syslog facility values send messages in concise format?",
+[
+"0 - 3",
+"4 - 7",
+"0 only",
+"8 - 15"
+],
+"Facility 0–3 的 Server 收到 Concise 格式，4–7 收到 Expanded 格式，預設為 0。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"What is the default syslog facility value?",
+[
+"0",
+"7",
+"4",
+"1"
+],
+"Syslog Facility 預設值為 0，Facility 也用來向接收端標示訊息來源。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"In which format are audit and authentication syslog messages sent?",
+[
+"A single format; there is no concise or expanded distinction",
+"Always expanded",
+"Always concise",
+"Depends on facility"
+],
+"Audit (-audit) 與 Authentication (-login) 訊息以單一格式傳送，沒有 Concise 與 Expanded 之分。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"Which transmission protocols does the system support for syslog?",
+[
+"TCP, UDP, and TLS",
+"Only UDP",
+"Only TCP",
+"HTTP and HTTPS"
+],
+"Syslog 支援 TCP、UDP 與 TLS。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"What is the default port for syslog over TCP?",
+[
+"6514",
+"514",
+"162",
+"443"
+],
+"TCP 預設 Port 為 6514，UDP 為 514。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"When using a domain name for a syslog server, what applies?",
+[
+"A DNS server must be configured and the name cannot exceed 40 characters",
+"The name must be under 255 characters with no DNS",
+"Only IPv6 names are allowed",
+"The name must match the system name"
+],
+"使用網域名稱時須設定 DNS Server，且名稱不超過 40 字元。",
+"簡報 S6；Concept Guide Ch15"
+],
+[
+"Which syslog option sends successful and failed authentication attempts?",
+[
+"Authentication log messages",
+"Audit log messages",
+"Information notifications",
+"Warning notifications"
+],
+"Authentication log messages 會傳送成功與失敗的驗證嘗試；Audit log messages 則包含 CLI 與 GUI 操作。",
+"Concept Guide Ch15"
+],
+[
+"How should warning notifications be treated?",
+[
+"Always investigate them immediately",
+"Ignore them unless repeated",
+"Treat them as information only",
+"Forward them only to IBM"
+],
+"Warning 表示問題或非預期狀況，應立即調查其影響並做必要修正。",
+"Concept Guide Ch15"
+],
+[
+"What type of TLS authentication do the system and syslog server use?",
+[
+"Mutual TLS, where each side verifies the other's certificate",
+"Server-only TLS",
+"Pre-shared keys",
+"No authentication"
+],
+"系統與 Syslog Server 使用 Mutual TLS，雙方互相驗證憑證。",
+"Concept Guide Ch15 Syslog over TLS"
+],
+[
+"Which tag must be turned on in the system trust store for the syslog server certificate?",
+[
+"syslog",
+"snmp",
+"ldap",
+"email"
+],
+"Syslog Server 的憑證 (或其 CA) 必須安裝於開啟 syslog 標籤的 Trust Store。",
+"Concept Guide Ch15"
+],
+[
+"How many CAs can sign the server certificates for syslog or SNMP servers?",
+[
+"Only one CA",
+"Up to two CAs",
+"Up to four CAs",
+"Any number"
+],
+"系統只支援一個 CA 簽署所有 Server 憑證；若用自簽憑證，所有 Server 須使用同一憑證。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"What should be included in the system certificate's subject alternative name for syslog servers?",
+[
+"The cluster FQDN and cluster IP address",
+"The serial number only",
+"The superuser name",
+"The MAC address"
+],
+"系統憑證的 Subject Alternative Name 應包含叢集的 FQDN 與 IP Address。",
+"Concept Guide Ch15"
+],
+[
+"Where are syslog notifications configured in the management GUI?",
+[
+"Settings > Notifications > Syslog",
+"Monitoring > Events > Syslog",
+"Access > Audit Log",
+"Settings > Network > Syslog"
+],
+"GUI 路徑為 Settings > Notifications > Syslog。",
+"Concept Guide Ch15"
+],
+[
+"Which syslog protocol option is described as reducing system and network overhead?",
+[
+"UDP",
+"TCP",
+"TLS",
+"HTTPS"
+],
+"UDP 用來降低系統與網路負擔，TCP 為可靠傳送，TLS 為加密傳送。",
+"Concept Guide Ch15"
+],
+[
+"After creating a TLS syslog server in the GUI, how must you modify or remove its trust store entries?",
+[
+"With the CLI",
+"With the GUI",
+"With Storage Insights",
+"They cannot be modified"
+],
+"GUI 建立 TLS Syslog Server 時會建立新的 Trust Store，既有 Server 的 Trust Store 項目需以 CLI 修改或移除。",
+"Concept Guide Ch15"
+],
+[
+"Which command creates a syslog server?",
+[
+"mksyslogserver",
+"addsyslog",
+"mklogserver",
+"chsyslog"
+],
+"`mksyslogserver` 建立、`chsyslogserver` 修改、`rmsyslogserver` 刪除、`lssyslogserver` 檢視。",
+"Concept Guide Ch15"
+],
+[
+"Which SNMP versions does the system support?",
+[
+"SNMP v2 and v3",
+"SNMP v1 only",
+"SNMP v3 only",
+"SNMP v1 and v2 only"
+],
+"系統支援 SNMP v2 與 v3。",
+"簡報 S7；Concept Guide Ch15"
+],
+[
+"Where can you download the SNMP MIB file?",
+[
+"Settings > Notifications > SNMP > Download MIB",
+"Monitoring > Events",
+"Support > Download",
+"Access > SNMP"
+],
+"MIB 檔可在 Settings > Notifications > SNMP 下載。",
+"簡報 S7；Concept Guide Ch15"
+],
+[
+"What is the default SNMP v2 community string?",
+[
+"public",
+"private",
+"ibm",
+"admin"
+],
+"SNMP v2 須指定 Community String，預設為 public。",
+"簡報 S7；Concept Guide Ch15"
+],
+[
+"Which SNMP v3 security model provides authentication and privacy at the message level?",
+[
+"User-based Security Model (USM)",
+"Transport Security Model (TSM)",
+"Community-based model",
+"View-based Access Control Model"
+],
+"USM 在訊息層級提供驗證與加密；TSM 則以 TLS 建立安全連線傳送。",
+"簡報 S7；Concept Guide Ch15"
+],
+[
+"Which credentials are required for the SNMP v3 USM security level Authentication and Privacy?",
+[
+"Engine ID, security name, authentication protocol and passphrase, privacy protocol and passphrase",
+"Engine ID and security name only",
+"Community string only",
+"A TLS certificate only"
+],
+"Authentication and Privacy 需要 Engine ID、Security Name、驗證協定與密碼，以及 Privacy 協定與密碼。",
+"Concept Guide Ch15 Table 47"
+],
+[
+"Which SNMP v3 USM security level authenticates notifications but does not encrypt message content?",
+[
+"Authentication",
+"None",
+"Authentication and Privacy",
+"Privacy only"
+],
+"Authentication 層級會驗證通知但不加密訊息內容。",
+"Concept Guide Ch15 Table 47"
+],
+[
+"What is required for the SNMP v3 engine ID?",
+[
+"Use a unique engine ID for every system; the system does not generate it automatically",
+"The system generates it automatically",
+"All systems share one engine ID",
+"It is the system serial number"
+],
+"每個系統應使用唯一的 Engine ID，系統不會自動產生；首次設定須產生新的 Engine ID。",
+"Concept Guide Ch15"
+],
+[
+"Does the system accept configuration GET requests from the SNMP server?",
+[
+"No",
+"Yes",
+"Only with SNMP v3",
+"Only with TLS"
+],
+"SNMP 不接受來自 SNMP Server 的任何 Configuration GET 請求。",
+"Concept Guide Ch15 Note"
+],
+[
+"When you send a test trap from the GUI, how do you know it succeeded?",
+[
+"Check on the SNMP server that the trap arrived; the system gives no success feedback",
+"The GUI shows a green check",
+"An email is sent",
+"The event log shows success"
+],
+"系統不會回報 Test 是否成功，需在 SNMP Server 端確認 Trap 已送達。",
+"Concept Guide Ch15"
+],
+[
+"Which command sends a test trap to an existing SNMP server?",
+[
+"testsnmpserver",
+"sendsnmptrap",
+"lssnmpserver -test",
+"chsnmpserver -test"
+],
+"`testsnmpserver` 送出測試 Trap；`mksnmpserver`、`chsnmpserver`、`rmsnmpserver`、`lssnmpserver` 用於管理。",
+"Concept Guide Ch15"
+],
+[
+"Which SNMP v3 security model is used for SNMP over TLS?",
+[
+"Transport Security Model (TSM)",
+"User-based Security Model (USM)",
+"Community model",
+"No security model"
+],
+"SNMP over TLS 使用 TSM，以 TLS 與 TCP 傳送 Trap。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"Is DTLS (TLS over UDP) supported for SNMP?",
+[
+"No",
+"Yes",
+"Only for SNMP v2",
+"Only with IPv6"
+],
+"系統不支援 DTLS (TLS over UDP)。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"Why does SNMP over TLS improve trap delivery compared to USM?",
+[
+"TCP handles timeouts and retries, whereas USM sends traps over UDP with no confirmation",
+"TLS compresses traps",
+"USM is not encrypted",
+"TCP is faster than UDP"
+],
+"TCP 會處理逾時與重試，送達性優於使用 UDP 且無確認的 USM。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"Which IP version is supported for SNMP over TLS?",
+[
+"IPv4 only",
+"IPv6 only",
+"Both IPv4 and IPv6",
+"Neither"
+],
+"SNMP over TLS 不支援 IPv6，系統與 SNMP Server 須使用 IPv4。",
+"簡報 S8；Concept Guide Ch15 Note"
+],
+[
+"When might SNMP over TLS be preferable?",
+[
+"When your organization already has a public-key infrastructure",
+"When using DTLS",
+"When IPv6 is required",
+"When no certificates are available"
+],
+"若組織已有 PKI，使用 SNMP over TLS 較合適。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"Which tag must be turned on in the trust store for the SNMP server certificate?",
+[
+"snmp",
+"syslog",
+"ldap",
+"cloud"
+],
+"SNMP Server 憑證須安裝於開啟 snmp 標籤的 Trust Store。",
+"簡報 S8；Concept Guide Ch15"
+],
+[
+"What happens to services that use certificate authentication when the system certificate changes?",
+[
+"They may be interrupted; add the new certificate to the necessary trust stores",
+"Nothing",
+"They are disabled permanently",
+"They switch to UDP"
+],
+"系統憑證被所有憑證驗證服務共用，更換後相關服務可能中斷，需更新相關 Trust Store。",
+"簡報 S8；Concept Guide Ch15 Note"
+],
+[
+"If an SNMP TLS test trap shows SSL or TLS errors in the server log, what should be checked?",
+[
+"That the correct certificates are installed and trusted on both sides and cipher suites are compatible",
+"The community string",
+"The MIB version",
+"The syslog facility"
+],
+"伺服器 Log 有 SSL/TLS 錯誤時，檢查雙方憑證是否正確安裝並信任，以及 Cipher Suite 是否相容。",
+"Concept Guide Ch15 Testing the SNMP server"
+],
+[
+"Which feature automatically notifies IBM Support of serious failures?",
+[
+"Call Home",
+"SNMP v2",
+"Syslog UDP",
+"Audit log"
+],
+"Call Home 讓嚴重故障自動通知 IBM Support。",
+"簡報 S4；Concept Guide Ch15"
+],
+[
+"Can SNMP traps, syslog, email, and Call Home be used at the same time?",
+[
+"Yes",
+"No, only one method at a time",
+"Only SNMP and syslog together",
+"Only Call Home and email together"
+],
+"SNMP Trap、Syslog、Email 與 Call Home 可同時使用。",
+"簡報 S4"
+]
+]
+}

@@ -44,7 +44,7 @@
 "Only within the same generation",
 "Only if they share a code level"
 ],
-"同一 Grid 可包含不同硬體型號與世代，便於硬體汰換或分層。",
+"同一 Grid 可包含不同硬體型號與世代，便於硬體汰換或 Tiering。",
 "簡報 S4；Concept Guide Ch10"
 ],
 [

@@ -154,7 +154,7 @@
 "chhost",
 "chsite"
 ],
-"以 `chnode` 指派 Node 的 Site，`chcontroller` 指派後端儲存，`chhost` 指派 Host。",
+"以 `chnode` 指派 Node 的 Site，`chcontroller` 指派 Backend 儲存，`chhost` 指派 Host。",
 "簡報 S8；Concept Guide Ch13 Configuration steps"
 ],
 [
@@ -473,7 +473,7 @@
 "A planned maintenance",
 "A drive rebuild"
 ],
-"Rolling Disaster 指事件影響逐步擴大且歷時較長，例如站點間鏈路先失效，之後取得 Quorum 的站點也失效。",
+"Rolling Disaster 指 Event 影響逐步擴大且歷時較長，例如站點間鏈路先失效，之後取得 Quorum 的站點也失效。",
 "簡報 S9"
 ],
 [

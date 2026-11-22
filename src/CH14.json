@@ -396,7 +396,7 @@
 "Compressing snapshots",
 "Encrypting host traffic"
 ],
-"Safeguarded Copy 將備份與正式資料隔離，遭受網路攻擊時可快速復原。",
+"Safeguarded Copy 將備份與正式資料 Isolation，遭受網路攻擊時可快速復原。",
 "簡報 S8；Concept Guide Ch14 Legacy Safeguarded Copy"
 ],
 [

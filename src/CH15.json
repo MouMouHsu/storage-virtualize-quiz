@@ -286,7 +286,7 @@
 "The superuser name",
 "The MAC address"
 ],
-"系統憑證的 Subject Alternative Name 應包含叢集的 FQDN 與 IP Address。",
+"系統憑證的 Subject Alternative Name 應包含 Cluster 的 FQDN 與 IP Address。",
 "Concept Guide Ch15"
 ],
 [

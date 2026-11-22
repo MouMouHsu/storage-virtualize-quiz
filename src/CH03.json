@@ -264,7 +264,7 @@
 "Easy Tier balancing",
 "Volume mirroring resync"
 ],
-"沒有可用的 Rebuild Area 時，以 Rebuild-in-place 將資料或 Parity 直接重建回替換的成員 Drive。",
+"沒有可用的 Rebuild Area 時，以 Rebuild-in-place 將資料或 Parity 直接 Rebuild 回替換的成員 Drive。",
 "簡報 S5；Concept Guide Ch3"
 ],
 [
@@ -319,7 +319,7 @@
 "Write cache for the array",
 "A dedicated hot spare drive"
 ],
-"Rebuild Area 是 Array 內保留、分散於所有 Drive 的容量，用於 Drive 失效後重建資料，不提供 Usable Capacity。",
+"Rebuild Area 是 Array 內保留、分散於所有 Drive 的容量，用於 Drive 失效後 Rebuild 資料，不提供 Usable Capacity。",
 "Concept Guide Ch3 Rebuild area"
 ],
 [

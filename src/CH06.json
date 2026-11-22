@@ -176,7 +176,7 @@
 "30 seconds",
 "2 minutes"
 ],
-"ATS Heartbeat 逾時值很低，若單一 Heartbeat I/O 延遲 8 秒以上，可能導致 Host 中斷。",
+"ATS Heartbeat 逾時值很低，若單一 Heartbeat I/O 需 8 秒以上才完成，可能導致 Host 中斷。",
 "Concept Guide Ch6 VMware ATS heartbeating"
 ],
 [

@@ -10,3 +10,9 @@
 - `assets/`：共用的作答程式與樣式
 
 修改題目後執行 `python3 build.py` 再 Commit。
+
+## 出題依據
+- 各章：IBM Storage Virtualize V9.2.0 Concept Guide 對應章節 + 章節簡報 (AI Output/IBM - Storage Virtualize/V9.2.0)，部分章節含 Troubleshooting Guide 內容
+- CH17 Cyber Resilience：Concept Guide 本章僅 1 頁，另取 Concept Guide 其他章節的 Safeguarded Snapshot、威脅偵測設定、TPI 等相關內容
+- CH24 Ansible Collection：Concept Guide 本章僅數行，另取 RedBook「Automating IBM Storage FlashSystem Tasks with REST APIs, PowerShell, Scripting, and Ansible」第 5 章
+- 每題說明皆附出處 (簡報頁碼或 Concept Guide 章節)

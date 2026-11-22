@@ -77,7 +77,7 @@
 "Yes, a Java agent",
 "Only on Windows"
 ],
-"Ansible 是 Agentless 架構，不需在被管理節點安裝 Agent 或 Daemon。",
+"Ansible 是 Agentless 架構，不需在被管理的 Node安裝 Agent 或 Daemon。",
 "RedBook 自動化 Ch5.2.3"
 ],
 [
@@ -242,7 +242,7 @@
 "Only for queries",
 "Only with Vault"
 ],
-"不支援透過叢集 IPv6 位址存取 REST API。",
+"不支援透過 Cluster IPv6 位址存取 REST API。",
 "RedBook 自動化 Ch5.2.6"
 ],
 [

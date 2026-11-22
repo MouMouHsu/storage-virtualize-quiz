@@ -1,0 +1,557 @@
+{
+"id": "CH09",
+"title": "Access",
+"zh": "存取控制",
+"items": [
+[
+"What does the Access menu in the GUI maintain?",
+[
+"Who can log in, the access rights of users, and what each privileged user did",
+"Host connectivity and zoning",
+"Pool capacity and thresholds",
+"Replication partnerships"
+],
+"Access 選單管理誰可以登入、使用者的存取權限，以及追蹤特權使用者在系統上做了什麼。",
+"Concept Guide Ch9"
+],
+[
+"What does an ownership group define?",
+[
+"A subset of users and objects within the system",
+"A set of nodes in an I/O group",
+"A group of pools with the same extent size",
+"A set of replication policies"
+],
+"Ownership Group 定義系統內一部分使用者與物件，群組內使用者只能檢視與管理該群組的物件。",
+"簡報 S3；Concept Guide Ch9 Ownership groups"
+],
+[
+"What can unrestricted users (not in an ownership group) do?",
+[
+"View or manage all objects based on their role, including objects in ownership groups",
+"Only view global resources",
+"Only manage objects not in any ownership group",
+"Nothing until assigned to a group"
+],
+"不在 Ownership Group 內的 Unrestricted 使用者，仍可依角色檢視或管理所有物件，包含 Ownership Group 內的物件。",
+"簡報 S3；Concept Guide Ch9"
+],
+[
+"How many ownership groups can an owned object belong to?",
+[
+"One",
+"Two",
+"Four",
+"Unlimited"
+],
+"一個物件只能屬於一個 Ownership Group。",
+"簡報 S3；Concept Guide Ch9"
+],
+[
+"Which object CANNOT be assigned to an ownership group?",
+[
+"MDisk",
+"Child pool",
+"Portset",
+"FlashCopy consistency group"
+],
+"MDisk 與 Drive 為全域資源，不能指派給 Ownership Group。",
+"簡報 S3；Concept Guide Ch9 Configuring ownership groups"
+],
+[
+"When a user group is assigned to an ownership group, what happens to its users' roles?",
+[
+"They retain their role but are restricted to resources in the same ownership group",
+"They lose their role",
+"They become Security Administrators",
+"They become Monitor users"
+],
+"使用者保留原本的角色，但只能存取同一 Ownership Group 內的資源，角色決定能做的操作、Ownership Group 再限制範圍。",
+"Concept Guide Ch9"
+],
+[
+"Which role can create, manage, or assign ownership groups?",
+[
+"Security Administrator",
+"Administrator",
+"Copy Operator",
+"Restricted Administrator"
+],
+"只有 Security Administrator 角色可以建立、管理或指派 Ownership Group。",
+"Concept Guide Ch9 Inheriting ownership"
+],
+[
+"From which object does a volume inherit its ownership group?",
+[
+"The child pool that provides capacity for the volume and its copies",
+"The host it is mapped to",
+"The volume group it belongs to",
+"The user who created it only"
+],
+"Volume 繼承提供容量的 Child Pool 的 Ownership Group。",
+"簡報 S4、S5；Concept Guide Ch9"
+],
+[
+"Does the ownership of a volume group affect the ownership of the volumes it contains?",
+[
+"No",
+"Yes, volumes always inherit it",
+"Only for thin volumes",
+"Only for HA volumes"
+],
+"Volume Group 的 Ownership 不影響其內 Volume 的 Ownership，兩者可分屬不同 Ownership Group。",
+"Concept Guide Ch9"
+],
+[
+"How can volume groups be created according to the Access chapter?",
+[
+"Only by using the CLI",
+"Only by using the GUI",
+"Only by using REST",
+"Only by IBM Support"
+],
+"Concept Guide 在 Ownership Group 說明中註明 Volume Group 只能透過 CLI 建立。",
+"Concept Guide Ch9 Note"
+],
+[
+"From which object do hosts that are part of a host cluster inherit ownership?",
+[
+"The host cluster",
+"The portset",
+"The child pool",
+"The volume"
+],
+"Host Cluster 內的 Host 繼承 Host Cluster 的 Ownership Group；變更 Host Cluster 的 Ownership 會自動變更所有成員。",
+"Concept Guide Ch9"
+],
+[
+"If a host is removed from a host cluster that is in an ownership group, what ownership does the host have?",
+[
+"It inherits the ownership group of the host cluster it used to belong to",
+"No ownership group",
+"The default ownership group",
+"The ownership group of its first volume"
+],
+"從屬於 Ownership Group 的 Host Cluster 移除時，Host 會保留原 Host Cluster 的 Ownership Group；若原 Cluster 無群組則無 Ownership。",
+"Concept Guide Ch9"
+],
+[
+"When can a host be added to a host cluster?",
+[
+"When the host and host cluster have the same ownership group",
+"At any time",
+"Only when neither has an ownership group",
+"Only by IBM Support"
+],
+"Host 與 Host Cluster 屬於相同 Ownership Group 時才能加入。",
+"Concept Guide Ch9"
+],
+[
+"Can users with the Security Administrator role be assigned to an ownership group?",
+[
+"No",
+"Yes",
+"Only remote users",
+"Only one per group"
+],
+"Security Administrator 角色的使用者不能被指派到 Ownership Group，User Group 在 Ownership Group 中也不能使用此角色。",
+"Concept Guide Ch9 User groups"
+],
+[
+"When a restricted user creates a portset, which ownership group is it assigned to?",
+[
+"The same ownership group as that user",
+"No ownership group",
+"The default ownership group",
+"The ownership group of the first host"
+],
+"Ownership Group 內使用者建立的 Portset 會自動指派到該使用者的 Ownership Group。",
+"Concept Guide Ch9 Portsets"
+],
+[
+"Can users in an ownership group own storage portsets?",
+[
+"No",
+"Yes",
+"Only replication portsets",
+"Only Ethernet portsets"
+],
+"Ownership Group 內使用者不能擁有 Storage Portset，Security Administrator 也不能變更 Storage Portset 的 Ownership。",
+"Concept Guide Ch9 Portsets"
+],
+[
+"How many ownership groups can an LDAP remote user belong to?",
+[
+"Just one, associated with one of its user groups",
+"One per user group",
+"None",
+"Unlimited"
+],
+"LDAP 遠端使用者可屬於多個 User Group，但只能屬於其中一個 User Group 關聯的一個 Ownership Group。",
+"Concept Guide Ch9 Users"
+],
+[
+"From which objects do FlashCopy mappings inherit their ownership group?",
+[
+"Both volumes defined in the mapping",
+"The consistency group",
+"The source pool only",
+"The user group"
+],
+"FlashCopy Mapping 繼承 Mapping 中兩個 Volume 的 Ownership Group；Consistency Group 的 Ownership 不影響其 Mapping。",
+"Concept Guide Ch9 FlashCopy mappings"
+],
+[
+"When migrating to ownership groups, what is required for volumes used in a FlashCopy mapping?",
+[
+"Both volumes must be in the same ownership group",
+"They must be in the same child pool",
+"They must be image mode",
+"They must be unmapped"
+],
+"FlashCopy Mapping 涉及的兩個 Volume 必須在同一 Ownership Group，即使由不同 Child Pool 提供容量。",
+"簡報 S5；Concept Guide Ch9 Migrating to ownership groups"
+],
+[
+"Can mapping objects such as host mappings be assigned to an ownership group directly?",
+[
+"No; their ownership is determined by the related objects",
+"Yes, from the Mappings page",
+"Yes, with chhostmap",
+"Only by IBM Support"
+],
+"Mapping 類物件不能直接指派，Ownership 依相關的 Host 或 Volume 決定。",
+"簡報 S4、S5"
+],
+[
+"Can users in an ownership group change the MDisk that provides capacity for their volume?",
+[
+"No; MDisks are global resources",
+"Yes",
+"Only if it is an array",
+"Only through the CLI"
+],
+"群組內使用者可變更群組內的 Volume，但不能變更提供容量的 MDisk 或 Drive 等全域資源。",
+"Concept Guide Ch9 Configuring ownership groups"
+],
+[
+"Can users in an ownership group view global resources such as drives?",
+[
+"Yes, they can view them but not change them",
+"No",
+"Only with Monitor role",
+"Only drives in their pools"
+],
+"群組內使用者可以檢視全域資源，但不能檢視其他群組或無群組的資源。",
+"簡報 S5；Concept Guide Ch9"
+],
+[
+"When should system backup operations be run with ownership groups?",
+[
+"When objects are in a consistent ownership state",
+"Only when ownership groups are disabled",
+"Every hour during migration",
+"Before creating any ownership group"
+],
+"為確保資訊完整，只在物件處於一致 Ownership 狀態時執行系統備份。",
+"Concept Guide Ch9 Migrating to ownership groups"
+],
+[
+"In migration scenario 1 where child pools exist, what happens when a child pool is assigned to an ownership group?",
+[
+"All volumes associated with the child pool automatically inherit its ownership group",
+"Volumes must be reassigned one by one",
+"The child pool is recreated",
+"Hosts automatically inherit it without prompt"
+],
+"現有 Child Pool 指派到 Ownership Group 後，其 Volume 自動繼承；GUI 會列出相依的 Host 供加入。",
+"Concept Guide Ch9 Migration Scenario 1"
+],
+[
+"Where in the GUI do you create an ownership group?",
+[
+"Access > Ownership Groups",
+"Settings > Security",
+"Pools > Child Pools",
+"Hosts > Host Clusters"
+],
+"於 Access > Ownership Groups 按 Create Ownership Group。",
+"Concept Guide Ch9 Using the management GUI"
+],
+[
+"Which field is unavailable when creating a data reduction child pool?",
+[
+"Capacity",
+"Name",
+"Ownership Group",
+"Parent pool"
+],
+"建立 Data Reduction Child Pool 時沒有 Capacity 欄位，它可無限制使用 Parent Pool 的可用容量。",
+"Concept Guide Ch9 Note"
+],
+[
+"How are roles defined in Storage Virtualize?",
+[
+"At the system level, so different systems can have different roles for a user",
+"Globally across all IBM systems",
+"Per volume",
+"Per host"
+],
+"角色定義於系統層級，同一使用者在不同系統可有不同角色。",
+"簡報 S7"
+],
+[
+"How many user groups can a local user belong to?",
+[
+"Only one",
+"Up to four",
+"Unlimited",
+"None"
+],
+"本機使用者只能屬於一個 User Group；遠端使用者可屬於多個。",
+"簡報 S7"
+],
+[
+"How are remote users authenticated?",
+[
+"By LDAP",
+"By the local password file only",
+"By the IP quorum",
+"By Storage Insights"
+],
+"遠端使用者由 LDAP 驗證；單一登入需有對應的 User Group。",
+"簡報 S7"
+],
+[
+"What can a local user add for CLI access in addition to a password?",
+[
+"An SSH key",
+"A certificate from the IP quorum",
+"A WWPN",
+"A host NQN"
+],
+"本機使用者以帳號密碼登入，也可加入 SSH Key 供 CLI 使用。",
+"簡報 S7"
+],
+[
+"At what level can multifactor authentication be enabled?",
+[
+"Per user group",
+"Per volume",
+"Per pool",
+"Per host"
+],
+"可按 User Group 啟用 Multifactor Authentication。",
+"簡報 S7"
+],
+[
+"What can a user group control besides the role?",
+[
+"Which interfaces and functions are available, including scripting and Storage Insights access",
+"The pool extent size",
+"The FC zoning",
+"The RAID level"
+],
+"User Group 可控制可用的介面與功能，包含腳本與 Storage Insights 等自動化存取。",
+"簡報 S7"
+],
+[
+"What is the range for consecutive failed login attempts before automatic lockout?",
+[
+"0 to 10, where 0 means no lockout",
+"1 to 100",
+"3 to 5 only",
+"0 to 255"
+],
+"自動鎖定可設定連續失敗 0 至 10 次，0 表示不鎖定。",
+"簡報 S8"
+],
+[
+"What is the maximum lockout duration?",
+[
+"10080 minutes (7 days); 0 means indefinite",
+"60 minutes",
+"24 hours",
+"30 days"
+],
+"鎖定時間 0 至 10080 分鐘 (最長 7 天)，0 表示無限期鎖定。",
+"簡報 S8"
+],
+[
+"Which command can a Security Administrator use to manually lock a user?",
+[
+"chuser -lock",
+"rmuser -lock",
+"lockuser",
+"chusergrp -lock"
+],
+"Security Administrator 可隨時以 `chuser -lock` 手動鎖定與解鎖使用者。",
+"簡報 S8"
+],
+[
+"Can a Security Administrator manually lock their own account?",
+[
+"No",
+"Yes",
+"Only through the GUI",
+"Only the superuser can"
+],
+"使用者不能手動鎖定自己的帳號。",
+"簡報 S8"
+],
+[
+"Where are password policies, including lockout, configured in the GUI?",
+[
+"Settings > Security > Password Policies",
+"Access > Users > Lockout",
+"Monitoring > Security",
+"Settings > System > Login"
+],
+"帳號鎖定等設定位於 Settings > Security > Password Policies。",
+"簡報 S8"
+],
+[
+"What is the superuser account?",
+[
+"The only local Security Administrator when the system is created",
+"A remote LDAP user",
+"The IBM Support account",
+"A Monitor role user"
+],
+"superuser 是系統建立時唯一的本機 Security Administrator。",
+"簡報 S8"
+],
+[
+"What must be done on the first login to a new system?",
+[
+"Change the default superuser password",
+"Create an ownership group",
+"Enable LDAP",
+"Create a child pool"
+],
+"新系統首次登入必須變更預設密碼。",
+"簡報 S8"
+],
+[
+"Can the superuser account be deleted?",
+[
+"No",
+"Yes, after creating another Security Administrator",
+"Yes, by IBM Support",
+"Yes, from the CLI only"
+],
+"superuser 不可刪除。",
+"簡報 S8"
+],
+[
+"Is the superuser subject to the account lockout policy by default?",
+[
+"No",
+"Yes",
+"Only for SSH",
+"Only for the GUI"
+],
+"superuser 預設不受鎖定政策約束；有專用 Technician Port 的系統可設定鎖定 superuser。",
+"簡報 S8"
+],
+[
+"Which tasks can only the superuser perform?",
+[
+"Entering service mode, system recovery, and backup/restore of configuration",
+"Creating volumes",
+"Mapping hosts",
+"Viewing the dashboard"
+],
+"只有 superuser 能進入 Service Mode、執行 System Recovery 與 Backup/Restore Configuration。",
+"簡報 S8"
+],
+[
+"What does the audit log record?",
+[
+"User actions submitted through management interfaces",
+"All host I/O operations",
+"Hardware sensor readings",
+"Replication bandwidth"
+],
+"Audit Log 記錄透過各管理介面提交的使用者動作，包括時間、使用者、來源 IP、Node 與參數。",
+"簡報 S9"
+],
+[
+"Are passwords recorded in clear text in the audit log?",
+[
+"No",
+"Yes",
+"Only for CLI commands",
+"Only for the superuser"
+],
+"Audit Log 記錄指令參數，但不含明碼密碼。",
+"簡報 S9"
+],
+[
+"Are failed commands recorded in the audit log?",
+[
+"No, only successful actions are recorded",
+"Yes, all commands are recorded",
+"Only failed GUI actions",
+"Only failed REST calls"
+],
+"Audit Log 只記錄成功的動作，失敗的指令不會記錄。",
+"簡報 S9"
+],
+[
+"From which interfaces can audit log entries originate?",
+[
+"GUI, CLI, or REST",
+"Only CLI",
+"Only GUI",
+"Only the Service Assistant"
+],
+"Audit Log 的來源可為 GUI、CLI 或 REST。",
+"簡報 S9"
+],
+[
+"How does the GUI display the time of audit log entries?",
+[
+"Converted to the browser's local time",
+"In UTC only",
+"In the system time",
+"It does not show time"
+],
+"CLI 顯示系統時間；GUI 會轉換為瀏覽器的本地時間。",
+"簡報 S9"
+],
+[
+"Where is the login message displayed?",
+[
+"Before login in the GUI, CLI, and Service Assistant",
+"After login in the GUI only",
+"Only on the technician port",
+"Only in email notifications"
+],
+"Login Message 是登入前顯示的訊息，適用 GUI、CLI 與 Service Assistant。",
+"簡報 S9"
+],
+[
+"Which command creates or changes the login message?",
+[
+"chbanner",
+"chloginmsg",
+"mkbanner",
+"chsystem -message"
+],
+"以 `chbanner` 指令或 Management GUI 建立與變更登入訊息。",
+"簡報 S9"
+],
+[
+"Which role can view, create, and manage all portsets on the system?",
+[
+"Security Administrator",
+"Copy Operator",
+"Monitor",
+"A restricted user in any ownership group"
+],
+"Security Administrator 可檢視、建立與管理系統上所有 Portset，但不能把 Portset 指派給位於不同 Ownership Group 的 Host。",
+"Concept Guide Ch9 Portsets"
+]
+]
+}

@@ -1,0 +1,557 @@
+{
+"id": "CH07",
+"title": "Policies",
+"zh": "Policy 管理",
+"items": [
+[
+"What is a provisioning policy?",
+[
+"An entity that defines rules for allocating capacity from a pool",
+"A rule that controls snapshot expiration",
+"A rule that defines replication topology",
+"A user role for storage administrators"
+],
+"Provisioning Policy 定義從 Pool 配置容量時的規則，Pool 內新建的 Volume 會自動採用其容量節省方式。",
+"簡報 S3；Concept Guide Ch7 Provisioning policies"
+],
+[
+"Which roles can use a provisioning policy to define rules for volume creation?",
+[
+"Administrator or Security Administrator",
+"Monitor or Copy Operator",
+"Service only",
+"Any user in an ownership group"
+],
+"Administrator 或 Security Administrator 可建立並套用 Provisioning Policy。",
+"簡報 S3；Concept Guide Ch7"
+],
+[
+"What happens to existing volumes when a provisioning policy is removed from a pool or replaced?",
+[
+"Their capacity savings do not change",
+"They are converted to the new policy immediately",
+"They are deleted",
+"They go offline"
+],
+"移除或更換 Policy 不影響既有 Volume 的容量節省方式，Policy 只在建立新 Volume 或 Volume Copy 時套用。",
+"簡報 S3；Concept Guide Ch7"
+],
+[
+"Which provisioning policy option uses only the built-in capacity savings of the pool, such as self-compressing FCM drives?",
+[
+"None",
+"Thin-provisioning",
+"Compression",
+"Deduplication"
+],
+"None 表示不額外使用容量節省，只依 Pool 內建功能，例如 FCM Drive 本身會自動壓縮。",
+"簡報 S3；Concept Guide Ch7"
+],
+[
+"Which optional attributes can be defined for the thin-provisioning option of a provisioning policy?",
+[
+"Buffer size and warning threshold",
+"Extent size and RAID level",
+"Cache mode and I/O group",
+"Retention and interval"
+],
+"Thin-provisioning 可選擇設定 Buffer Size 與 Warning Threshold。",
+"簡報 S3；Concept Guide Ch7"
+],
+[
+"Which pools support deduplication in a provisioning policy?",
+[
+"Data reduction pools only",
+"Standard pools only",
+"Both standard and data reduction pools",
+"Child pools only"
+],
+"Deduplication 只有 Data Reduction Pool 支援，可搭配 Thin 與 Compression；Standard Pool 不支援。",
+"簡報 S3；Concept Guide Ch7"
+],
+[
+"Can the capacity savings option of an existing provisioning policy be changed?",
+[
+"No; create and assign a new policy instead",
+"Yes, with chprovisioningpolicy",
+"Yes, but only in the GUI",
+"Yes, only when no volumes exist"
+],
+"Provisioning Policy 可改名，但容量節省選項不能更改；需建立新 Policy 並指派給 Pool 取代舊的。",
+"Concept Guide Ch7"
+],
+[
+"How many provisioning policies can a pool have?",
+[
+"Only one",
+"Two",
+"Four",
+"Unlimited"
+],
+"一個 Provisioning Policy 可關聯多個 Pool，但一個 Pool 只能有一個 Policy。",
+"Concept Guide Ch7"
+],
+[
+"Which command converts existing volumes to the capacity savings of a new provisioning policy?",
+[
+"addvolumecopy",
+"chvdisk -policy",
+"mkprovisioningpolicy",
+"migratevdisk"
+],
+"使用 `addvolumecopy` 轉換既有 Volume；搭配 -autodelete 可在新 Copy 同步後自動刪除原 Copy。",
+"Concept Guide Ch7"
+],
+[
+"Which CLI command creates a provisioning policy?",
+[
+"mkprovisioningpolicy",
+"mkpolicy -type provisioning",
+"mkmdiskgrp -policy",
+"chprovisioning"
+],
+"`mkprovisioningpolicy` 建立 Provisioning Policy，再以 `mkmdiskgrp` 或 `chmdiskgrp` 加到 Pool。",
+"Concept Guide Ch7"
+],
+[
+"Where are provisioning policies configured in the management GUI?",
+[
+"Policies > Provisioning Policies",
+"Pools > Properties > Advanced",
+"Settings > System > Policies",
+"Volumes > Create Volumes"
+],
+"GUI 於 Policies > Provisioning Policies 設定，再到 Pools > Pools 指派給 Pool。",
+"Concept Guide Ch7"
+],
+[
+"What is a snapshot policy?",
+[
+"A set of rules that controls the creation and expiration of snapshots",
+"A rule that maps volumes to hosts",
+"A rule that limits pool capacity",
+"A rule that sets replication bandwidth"
+],
+"Snapshot Policy 是控制 Snapshot 建立與到期的規則。",
+"Concept Guide Ch7 Snapshot policies"
+],
+[
+"What are the two types of snapshot policies?",
+[
+"System-scoped and partition-scoped",
+"Local and remote",
+"Primary and secondary",
+"Safeguarded and unsafeguarded only"
+],
+"Snapshot Policy 分為 System-scoped (與 Storage Partition 無關) 與 Partition-scoped (屬於特定 Partition) 兩類。",
+"簡報 S5；Concept Guide Ch7"
+],
+[
+"How many schedules can a snapshot policy have?",
+[
+"Up to two",
+"Only one",
+"Up to four",
+"Up to ten"
+],
+"一個 Snapshot Policy 最多 2 個 Schedule，可分別設定不同頻率與保留期間。",
+"簡報 S4、S5；Concept Guide Ch7"
+],
+[
+"What is the minimum backup interval for a snapshot policy schedule?",
+[
+"60 minutes",
+"15 minutes",
+"1 minute",
+"24 hours"
+],
+"Backup Interval 最短為 60 分鐘。",
+"簡報 S5；Concept Guide Ch7"
+],
+[
+"What is the maximum retention period for a snapshot policy schedule?",
+[
+"365 days",
+"30 days",
+"90 days",
+"7 years"
+],
+"Retention Period 最長為 365 天。",
+"簡報 S5；Concept Guide Ch7"
+],
+[
+"How many snapshot policies can a volume group have?",
+[
+"Only one",
+"Two",
+"Four",
+"Unlimited"
+],
+"一個 Snapshot Policy 可指派給多個 Volume Group，但一個 Volume Group 只能有一個 Policy。",
+"簡報 S4、S5；Concept Guide Ch7"
+],
+[
+"If a system-scoped snapshot policy includes two schedules, what restriction applies?",
+[
+"Only one schedule can be a cloud backup schedule",
+"Both must be cloud backup schedules",
+"Neither can be Safeguarded",
+"Both must have the same retention"
+],
+"System-scoped Policy 有兩個 Schedule 時，只有一個可以是 Cloud Backup Schedule。",
+"簡報 S5；Concept Guide Ch7"
+],
+[
+"What does the predefined frequent-creation, shortest-retention snapshot policy do?",
+[
+"Creates snapshots every six hours and retains them for one week",
+"Creates snapshots hourly and retains them for one day",
+"Creates snapshots daily and retains them for one month",
+"Creates snapshots weekly and retains them for one year"
+],
+"最頻繁的預設 Policy 每 6 小時建立、保留 1 週，適合常更新且關鍵的資料，例如帳戶與訂單。",
+"簡報 S6；Concept Guide Ch7"
+],
+[
+"Which predefined snapshot policy creates snapshots monthly and retains them for one year?",
+[
+"The less frequent, long retention policy",
+"The hybrid policy",
+"The cloud snapshot only policy",
+"The frequent, shortest retention policy"
+],
+"每月建立、保留 1 年的 Policy 適合不常更新但需保存的資料，例如歷史客戶資料或員工紀錄。",
+"簡報 S6；Concept Guide Ch7"
+],
+[
+"What does the predefined cloud snapshots only policy do?",
+[
+"Creates cloud snapshots daily and retains them for one month",
+"Creates cloud snapshots hourly and retains them for one week",
+"Creates cloud snapshots weekly and retains them for one year",
+"Copies all local snapshots to the cloud"
+],
+"Cloud Snapshot Only Policy 每日建立 Cloud Snapshot、保留 1 個月。",
+"簡報 S6；Concept Guide Ch7"
+],
+[
+"What does the predefined hybrid snapshot policy do?",
+[
+"Local snapshots every six hours kept one week, plus daily cloud snapshots kept one month",
+"Local snapshots daily, cloud snapshots hourly",
+"Only Safeguarded local snapshots",
+"Weekly local and monthly cloud snapshots"
+],
+"Hybrid Policy：本機每 6 小時、保留 1 週；雲端每日、保留 1 個月。",
+"簡報 S6；Concept Guide Ch7"
+],
+[
+"Which external scheduler is mentioned as able to add and manage snapshots?",
+[
+"IBM Copy Services Manager",
+"IBM Spectrum Protect Plus only",
+"VMware SRM",
+"Ansible Tower only"
+],
+"官方說明 Snapshot 也可由外部排程工具，例如 IBM Copy Services Manager 建立與管理。",
+"Concept Guide Ch7 Note"
+],
+[
+"Which feature applies to partition-scoped snapshot policies?",
+[
+"They are immutable after creation",
+"They support cloud backup schedules",
+"They can be assigned to volume groups in any partition",
+"They must have exactly one schedule"
+],
+"Partition-scoped Snapshot Policy 建立後不可變，支援 1 或 2 個本機 Schedule，並與 Partition 的 Split、Merge 整合。",
+"簡報 S5；Concept Guide Ch7 Partition-scoped snapshot policies"
+],
+[
+"In HA environments, what happens when a partition-scoped snapshot policy is created or assigned?",
+[
+"The change is automatically replicated across both HA systems",
+"It must be created manually on both systems",
+"It applies only to the active management system",
+"It is converted to a system-scoped policy"
+],
+"HA 環境中 Partition-scoped Policy 的建立、指派或刪除會自動同步到兩個 HA 系統。",
+"簡報 S5；Concept Guide Ch7"
+],
+[
+"When assigning a partition-scoped snapshot policy to a volume group, what is required?",
+[
+"The policy and the volume group must belong to the same partition",
+"The volume group must be in a side partition",
+"The volume group must have no volumes",
+"The policy must have a cloud schedule"
+],
+"指派時 Snapshot Policy 與 Volume Group 必須屬於同一個 Partition。",
+"Concept Guide Ch7"
+],
+[
+"Where in the GUI do you create a system-scoped snapshot policy?",
+[
+"Policies > Snapshot policies > Create snapshot policy",
+"Storage partitions > View partition > Snapshot policies",
+"Volumes > Snapshots > Schedule",
+"Settings > Snapshots"
+],
+"System-scoped Policy 由 Policies > Snapshot policies 建立；Partition-scoped 則由 Storage partitions 的 View partition 建立。",
+"Concept Guide Ch7 Assigning snapshot policies"
+],
+[
+"If a monthly snapshot policy starts on 31 May, when is the next snapshot created?",
+[
+"30 June",
+"1 July",
+"31 July only",
+"28 June"
+],
+"每月排程在日期不存在的月份會使用該月最後一天，因此 5/31 起的下一次為 6/30，之後是 8/31。",
+"Concept Guide Ch7 Note"
+],
+[
+"How do daylight saving changes affect snapshot schedules?",
+[
+"They do not affect the backup and retention intervals",
+"Snapshots are skipped during the change",
+"Intervals are recalculated by clock time",
+"Schedules are suspended"
+],
+"日光節約時間不影響間隔，例如每日 2:00 的排程會在調整後於 1:00 建立，間隔仍維持 24 小時。",
+"Concept Guide Ch7 Note"
+],
+[
+"Why do changes to the system time or time zone not affect existing snapshot schedules?",
+[
+"Schedules use an internal tick-driven time delta, not clock time",
+"Schedules are stored in UTC on the cloud",
+"Schedules are disabled when time changes",
+"Schedules are reset to defaults"
+],
+"Schedule 以內部 tick 時間差運作，不依實際時鐘，因此修改系統時間或時區不影響既有排程。",
+"Concept Guide Ch7 Note"
+],
+[
+"Which command assigns or changes the snapshot policy on an existing volume group?",
+[
+"chvolumegroup",
+"mksnapshotpolicy",
+"chsnapshotpolicy",
+"mkvolumegroup"
+],
+"`mksnapshotpolicy` 建立 Policy；`mkvolumegroup` 在建立時指派；`chvolumegroup` 變更既有 Volume Group 的 Policy。",
+"Concept Guide Ch7"
+],
+[
+"If you assign a policy to a volume group that already has a policy, what happens?",
+[
+"The new policy replaces the existing policy",
+"The assignment fails",
+"Both policies apply",
+"The old policy is kept and the new one is queued"
+],
+"對已有 Policy 的 Volume Group 指派新 Policy，新 Policy 會取代舊 Policy。",
+"Concept Guide Ch7"
+],
+[
+"When must a snapshot policy be specified as Safeguarded at creation?",
+[
+"When it has more than one schedule, and for all partition-scoped policies",
+"Only when it uses the cloud",
+"Only for predefined policies",
+"Never; Safeguarded is set per snapshot"
+],
+"有兩個以上 Schedule 的 Policy，以及所有 Partition-scoped Policy，都必須在建立時指定為 Safeguarded。",
+"Concept Guide Ch7"
+],
+[
+"Can predefined snapshot policies be deleted?",
+[
+"No",
+"Yes, with rmsnapshotpolicy",
+"Yes, by a Security Administrator",
+"Yes, if no volume group uses them"
+],
+"`rmsnapshotpolicy` 只能刪除使用者自訂 Policy，預設 Policy 不能刪除。",
+"Concept Guide Ch7 Deleting snapshot policies"
+],
+[
+"Which privilege is required to delete snapshot policies that are associated with volume groups?",
+[
+"Security administration privileges",
+"Monitor privileges",
+"Copy Operator privileges",
+"Service privileges"
+],
+"刪除已關聯 Volume Group 的 Policy 需要 Security Administrator 權限。",
+"Concept Guide Ch7"
+],
+[
+"Why would you suspend snapshot policies?",
+[
+"To avoid capturing malicious data when source volumes are compromised during a cyberattack or disaster",
+"To save capacity during low usage",
+"To speed up replication",
+"To upgrade code"
+],
+"遭受網路攻擊或 DR 情境時，攻擊期間的 Snapshot 可能含惡意資料，可暫停 Snapshot Policy 直到釐清受影響資料。",
+"Concept Guide Ch7 Suspending snapshot policies"
+],
+[
+"Which command suspends the snapshot policy of a volume group?",
+[
+"chvolumegroupsnapshotpolicy",
+"chsnapshotpolicy -suspend",
+"rmsnapshotpolicy",
+"chvolumegroup -nosnapshot"
+],
+"以 `chvolumegroupsnapshotpolicy` 或 GUI 的 Volume groups 在 Volume Group 層級暫停；`chsystem` 可暫停系統所有 Policy。",
+"Concept Guide Ch7"
+],
+[
+"How do you fully suspend a highly available partition-scoped snapshot policy?",
+[
+"Run chvolumegroupsnapshotpolicy on both the active and non-active management systems",
+"Run it once on either system",
+"Run chsystem on the active system only",
+"Delete and re-create the policy"
+],
+"HA Partition-scoped Policy 只在執行指令的系統上暫停，要完全暫停需在 Active 與 Non-active Management System 都執行。",
+"Concept Guide Ch7"
+],
+[
+"Can snapshots be used for cloning or restoring while snapshot policies are suspended?",
+[
+"Yes",
+"No",
+"Only for cloning",
+"Only for Safeguarded snapshots"
+],
+"Snapshot Policy 暫停期間，仍可用既有 Snapshot 進行 Clone 或 Restore。",
+"Concept Guide Ch7"
+],
+[
+"What does a replication policy define?",
+[
+"How replication is configured between systems",
+"How capacity is allocated",
+"How snapshots expire",
+"How hosts log in"
+],
+"Replication Policy 定義系統間 Replication 的設定方式，其 Topology 決定 Replication 類型。",
+"簡報 S7；Concept Guide Ch7 Replication policies"
+],
+[
+"In the management GUI, how are systems in a high availability replication policy laid out?",
+[
+"Location 1 is fixed on the left and location 2 on the right, regardless of replication direction",
+"The production system is always on the left",
+"The layout changes with replication direction",
+"The system with more capacity is on the left"
+],
+"GUI 固定 Location 1 在左、Location 2 在右，不受 Replication 方向影響，方便從任一系統監控。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"Which feature is enabled by default in a high availability replication policy if both systems support it?",
+[
+"Highly available snapshots",
+"Asynchronous compression",
+"Cloud snapshots",
+"Volume protection"
+],
+"兩個系統都支援時，HA Replication Policy 預設啟用 Highly Available Snapshot。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"How can local volumes that are not replicated be mapped to hosts in an HA storage partition?",
+[
+"Place their volume groups in a side partition associated with the storage partition",
+"Add them to the HA partition without a policy",
+"Use a separate host object",
+"Use image mode volumes"
+],
+"不需 Replication 的本機 Volume 可放到與 Storage Partition 關聯的 Side Partition，仍可映射給該 Partition 的 Host。",
+"Concept Guide Ch7 High availability"
+],
+[
+"Which configurations can a high availability replication policy be used for?",
+[
+"2-site HA and 3-site (HA with DR) configurations",
+"Only 2-site DR",
+"Only cloud replication",
+"Only local snapshots"
+],
+"HA Replication Policy 可用於 2-site HA 與 3-site (HA + DR) Configuration。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"Over which connection type is synchronous DR replication NOT supported?",
+[
+"TCP/IP",
+"Fibre Channel",
+"FC with a long-distance link",
+"Native FC ISL"
+],
+"同步 DR 讓兩站點同時寫入以保持一致，但不支援透過 TCP/IP 連線。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"How does asynchronous DR replication write data?",
+[
+"First at the primary site, then to the secondary site with a slight delay",
+"At both sites simultaneously",
+"Only to the secondary site",
+"Only when a snapshot is taken"
+],
+"非同步 DR 先寫主站點，再稍後複製到次站點，降低網路負載並仍滿足 RPO。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"What does asynchronous replication do automatically in bandwidth-constrained environments?",
+[
+"Compresses data before transmission",
+"Switches to synchronous mode",
+"Stops replication",
+"Deduplicates data at the target only"
+],
+"Bandwidth 受限時，非同步 Replication 會自動在傳輸前壓縮資料，無需使用者設定。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"When is a 2-site disaster recovery replication policy without storage partitions used?",
+[
+"For volume groups not in a storage partition, such as for hosts not currently supported in a partition",
+"For all HA configurations",
+"Only for 3-site replication",
+"Only for cloud snapshots"
+],
+"不使用 Storage Partition 的 2-site DR Policy 適用於不能使用 Partition 的環境，可為非同步或同步，並指定系統與 I/O Group。",
+"簡報 S7；Concept Guide Ch7"
+],
+[
+"Between which types of policies can you switch for a volume group in a storage partition?",
+[
+"Synchronous and asynchronous disaster recovery policies",
+"HA and snapshot policies",
+"Provisioning and snapshot policies",
+"Local and cloud provisioning policies"
+],
+"在 Storage Partition 的 Volume groups 面板可為 Volume Group 新增或移除 Replication，並在同步與非同步 DR Policy 之間切換。",
+"Concept Guide Ch7 Disaster recovery policies"
+],
+[
+"Which predefined snapshot policy creates snapshots weekly and retains them for one month?",
+[
+"The less frequent, medium retention policy",
+"The hybrid policy",
+"The cloud snapshot only policy",
+"The less frequent, long retention policy"
+],
+"每週建立、保留 1 個月的 Policy 適合常更新但非關鍵的應用資料。",
+"簡報 S6；Concept Guide Ch7"
+]
+]
+}
